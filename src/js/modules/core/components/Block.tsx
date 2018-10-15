@@ -4,16 +4,16 @@ import injectSheet from "react-jss/lib/injectSheet";
 
 const styles: Styles = {
   Block: {
-      width: "50%",
-      height: "80%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gridArea: (props: BlockProps) => props.name,
-      backgroundColor: (props: BlockProps) => props.color
+    width: "50%",
+    minWidth: "25vh",
+    height: "80%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gridArea: (props: BlockProps) => props.name,
+    backgroundColor: (props: BlockProps) => props.color
   }
 };
-
 
 interface BlockProps {
   name: string;

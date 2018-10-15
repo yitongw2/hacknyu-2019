@@ -1,5 +1,6 @@
 import * as React from "react";
 import injectSheet, { Styles } from "react-jss";
+import {Link} from "react-router-dom";
 
 const styles: Styles = {
   Header: {
@@ -11,7 +12,6 @@ const styles: Styles = {
     alignItems: "center"
   },
   headerText: {
-    color: "white",
     fontSize: "3em"
   }
 };
@@ -22,7 +22,10 @@ interface HeaderProps {
 const Header: React.SFC<HeaderProps> = ({ classes }) => {
   return (
     <div className={classes.Header}>
-      <h1 className={classes.headerText}> Welcome To HackNYU 2019 </h1>
+      <Link to="/">
+        <h1 className={classes.headerText}> HackNYU </h1>
+        <h2> The Most Beautiful Site Ever </h2>
+      </Link>
     </div>
   );
 };
