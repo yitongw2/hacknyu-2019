@@ -4,11 +4,13 @@ import injectSheet from "react-jss/lib/injectSheet";
 
 const styles: Styles = {
   FillerBox: {
-    gridArea: props => `blank${props.index}`
+    // @ts-ignore
+    gridArea: (props: FillerBoxProps) => `blank${props.index}`
   }
 };
 
 interface FillerBoxProps {
+  index: number;
   classes: { [s: string]: string };
 }
 

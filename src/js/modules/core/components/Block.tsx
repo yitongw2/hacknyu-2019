@@ -10,7 +10,9 @@ const styles: Styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    // @ts-ignore
     gridArea: (props: BlockProps) => props.name,
+    // @ts-ignore
     backgroundColor: (props: BlockProps) => props.color
   }
 };

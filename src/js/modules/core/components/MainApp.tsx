@@ -1,9 +1,13 @@
 import * as React from "react";
+import { ReactNode } from "react";
 import injectSheet, { Styles } from "react-jss";
+// @ts-ignore
 import Header from "./Header";
 
 import { withRouter } from "react-router-dom";
-import {ReactNode} from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import {State} from "../../types";
 
 const styles: Styles = {
   app: {
@@ -19,18 +23,28 @@ const styles: Styles = {
 };
 
 interface Props {
-    classes: { [s: string]: string },
-    children: ReactNode
+  classes: { [s: string]: string };
+  children: ReactNode;
+  error: string;
 }
 
-const MainApp: React.SFC<Props> = ({ classes, children }) => {
+const MainApp: React.SFC<Props> = ({ classes, error, children }) => {
   return (
     <div className={classes.app}>
       <Header />
+      {error && <h2 className={classes.error}> {error} </h2>}
       {children}
     </div>
   );
 };
 
+const mapStateToProps = (state: State) => ({
+  error: state.core.error
+});
+
 // @ts-ignore
-export default withRouter(injectSheet(styles)(MainApp));
+export default compose(
+  withRouter,
+  injectSheet(styles),
+  connect(mapStateToProps)
+)(MainApp);

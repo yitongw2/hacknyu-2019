@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { RoutingApp } from "./modules";
 import { AppContainer } from "react-hot-loader";
-import firebase, {auth, provider } from './firebase'
 import injectTapEventPlugin from "react-tap-event-plugin";
 
 // for onClick events with MUI/React

@@ -1,15 +1,20 @@
-import { REFRESH_WINDOW_DIMENSIONS } from './coreActions';
+import {
+  LOGIN_FULFILLED,
+  LOGIN_REJECTED, LOGOUT_FULFILLED, LOGOUT_REJECTED,
+  REFRESH_WINDOW_DIMENSIONS
+} from './coreActions'
+import {User} from "firebase";
 
 // getWindowWidth & getWindowHeight was
 // adapted from http://stackoverflow.com/a/8876069/1291659
-var getViewportWidth = function() {
+const getViewportWidth = () => {
   return (
     Math.max(window.document.documentElement.clientWidth, window.innerWidth) ||
     0
   );
 };
 
-var getViewportHeight = function() {
+const getViewportHeight = () => {
   return (
     Math.max(
       window.document.documentElement.clientHeight,
@@ -19,11 +24,11 @@ var getViewportHeight = function() {
 };
 
 const initialState = {
-  language: "en",
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
-  appMenuOpen: false // for mobile views
+  user: null
 };
+
 
 const reducer = (state = { ...initialState }, action) => {
   switch (action.type) {
@@ -38,6 +43,14 @@ const reducer = (state = { ...initialState }, action) => {
         // override width/height which will refresh app view
         return Object.assign({ ...state }, { viewportWidth, viewportHeight });
       } else return state; //otherwise do not mutate
+    case LOGIN_FULFILLED:
+      return { ...state, user: action.payload };
+    case LOGIN_REJECTED:
+      return { ...state, error: action.payload };
+    case LOGOUT_FULFILLED:
+      return { ...state, user: null };
+    case LOGOUT_REJECTED:
+      return { ...state, error: action.payload };
     default:
       break;
   }
