@@ -55,10 +55,7 @@ const Header: React.SFC<Props> = ({ classes, user, logout, login }) => {
       <div className={classes.userInfo}>
         {user ? (
           <div>
-            <Avatar url={user.photoURL} />
-            <button onClick={logout}>
-              <h2> Log Out </h2>
-            </button>
+            <Avatar user={user} logout={logout}/>
           </div>
         ) : (
           <button onClick={login}>
