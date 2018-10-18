@@ -6,25 +6,35 @@ import { Link } from "react-router-dom";
 import { login, logout } from "../coreActions";
 import Avatar from "./Avatar";
 import { User } from "firebase";
-import LoginButton from "./LoginButton";
+import {Theme} from "../../types";
 
-const styles: Styles = {
+const styles = (theme: Theme): Styles => ({
   Header: {
+    backgroundColor: theme.backgroundColor,
     width: "100%",
-    padding: "20px",
+    height: "100%",
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
   },
   masthead: {
-    width: "80%",
-    paddingLeft: "50px"
+    margin: 0,
+    paddingLeft: "20px",
+    fontSize: "3rem",
+    transition: "font-size 1s",
   },
   headerText: {
-    fontSize: "3em"
+    padding: "20px",
+    backgroundColor: theme.highlightColor,
+    color: theme.secondFont
+  },
+  link: {
+    paddingRight: "10px",
+    color: theme.fontColor
   },
   userInfo: {
-    width: "!00%",
+    width: "100%",
+    height: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
@@ -33,7 +43,7 @@ const styles: Styles = {
   error: {
     color: "red"
   }
-};
+});
 
 interface Props {
   classes: { [s: string]: string };
@@ -52,12 +62,26 @@ const Header: React.SFC<Props> = ({ classes, user, logout, login }) => {
         </Link>
       </div>
       <div className={classes.userInfo}>
+        <h1 className={classes.signUp}>
+          <Link to="/signup">
+            <div className={classes.link}> Sign Up! </div>
+          </Link>
+        </h1>
+        <h1 className={classes.learnMore}>
+          <Link to="/about">
+            <div className={classes.link}> Learn More! </div>
+          </Link>
+        </h1>
         {user ? (
           <div>
             <Avatar user={user} logout={logout}/>
           </div>
         ) : (
-          <LoginButton login={login} />
+          <h1>
+            <a href="#" className={classes.link} onClick={login}>
+              Login!
+            </a>
+          </h1>
         )}
       </div>
     </div>

@@ -28,10 +28,10 @@ interface Props {
   location: Location;
 }
 
-const MainApp: React.SFC<Props> = ({ classes, error, children, location }) => {
+const MainApp: React.SFC<Props> = ({ classes, error, children }) => {
   return (
       <div className={classes.app}>
-        {location.pathname !== "/" && <Header />}
+        <Header />
         {error && <h2 className={classes.error}> {error} </h2>}
         {children}
       </div>
