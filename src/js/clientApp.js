@@ -14,6 +14,7 @@ try {
 
 import { VERSION } from "./versionInfo";
 
+
 console.log("appVersion ->", VERSION);
 
 ReactDOM.render(

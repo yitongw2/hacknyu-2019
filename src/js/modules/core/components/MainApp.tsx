@@ -4,27 +4,13 @@ import injectSheet, { Styles } from "react-jss";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import {State} from "../../types";
+import {State, Theme} from "../../types";
 import Header from "./Header";
 
-interface Theme {
-  background: string,
-  fontColor: string
-}
-
-const themes: { [s: string]: Theme } = {
-  '/': { background: "#db5461", fontColor: "#fafafa" },
-  '/signup': { background: "#e3f2fd", fontColor: "#686963"},
-  '/about': { background: "#8aa29e", fontColor: "#686963"}
-};
-
-
-const styles: Styles = {
+const styles = (theme: Theme): Styles => ({
   app: {
-    // @ts-ignore
-    backgroundColor: props => themes[props.location.pathname]["background"],
-    // @ts-ignore
-    color:  props => themes[props.location.pathname]["fontColor"],
+    backgroundColor: theme.backgroundColor,
+    color: theme.fontColor,
     transition: "background-color 2s, font-color 2s",
     fontFamily: "mr-eaves-xl-modern, sans-serif",
     height: "100%",
@@ -33,23 +19,22 @@ const styles: Styles = {
     flexDirection: "column",
     alignItems: "center"
   }
-};
+});
 
 interface Props {
   classes: { [s: string]: string };
   children: ReactNode;
   error: string;
-  location: Location
+  location: Location;
 }
 
 const MainApp: React.SFC<Props> = ({ classes, error, children, location }) => {
-  console.log(themes[location.pathname].background);
   return (
-    <div className={classes.app}>
-      { location.pathname !== '/' && <Header />}
-      {error && <h2 className={classes.error}> {error} </h2>}
-      {children}
-    </div>
+      <div className={classes.app}>
+        {location.pathname !== "/" && <Header />}
+        {error && <h2 className={classes.error}> {error} </h2>}
+        {children}
+      </div>
   );
 };
 

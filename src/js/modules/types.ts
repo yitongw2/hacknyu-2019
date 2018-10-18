@@ -9,3 +9,8 @@ export interface CoreState {
   user: User,
   error: string
 }
+
+export interface Theme {
+  backgroundColor: string;
+  fontColor: string;
+}
