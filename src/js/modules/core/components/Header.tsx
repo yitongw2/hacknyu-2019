@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { login, logout } from "../coreActions";
 import Avatar from "./Avatar";
 import { User } from "firebase";
+import LoginButton from "./LoginButton";
 
 const styles: Styles = {
   Header: {
@@ -14,14 +15,12 @@ const styles: Styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
-    backgroundColor: "#57068c"
   },
   masthead: {
     width: "80%",
     paddingLeft: "50px"
   },
   headerText: {
-    color: "white",
     fontSize: "3em"
   },
   userInfo: {
@@ -58,9 +57,7 @@ const Header: React.SFC<Props> = ({ classes, user, logout, login }) => {
             <Avatar user={user} logout={logout}/>
           </div>
         ) : (
-          <button onClick={login}>
-            <h2> Log In </h2>
-          </button>
+          <LoginButton login={login} />
         )}
       </div>
     </div>

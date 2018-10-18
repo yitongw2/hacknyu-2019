@@ -3,13 +3,33 @@ import { Link } from "react-router-dom";
 import injectSheet, { Styles } from "react-jss";
 
 const styles: Styles = {
+  HomePage: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: "80%"
+  },
   learnMore: {
-    fontsize: "2em"
+    width: "100%",
+  },
+  links: {
+    fontSize: "2em",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row"
   },
   signUp: {
+    width: "100%",
     display: "flex",
     padding: "30px",
     fontSize: "2em"
+  },
+  masthead: {
+    color: "white",
+    fontSize: "4em"
+  },
+  link: {
+    color: "white"
   }
 };
 
@@ -19,13 +39,20 @@ interface Props {
 
 const HomePage: React.SFC<Props> = ({ classes }) => {
   return (
-    <div>
-      <Link to="/signup">
-        <h1 className={classes.signUp}> Sign Up! </h1>
-      </Link>
-      <Link to="/about">
-        <h1 className={classes.learnMore}> Learn More </h1>
-      </Link>
+    <div className={classes.HomePage}>
+      <h1 className={classes.masthead}> HackNYU </h1>
+      <div className={classes.links}>
+        <h1 className={classes.signUp}>
+          <Link to="/signup">
+            <div className={classes.link}> Sign Up! </div>
+          </Link>
+        </h1>
+        <h1 className={classes.learnMore}>
+          <Link to="/about">
+            <div className={classes.link}> Learn More </div>
+          </Link>
+        </h1>
+      </div>
     </div>
   );
 };
