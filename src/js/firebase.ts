@@ -9,6 +9,9 @@ const config = {
     messagingSenderId: "482443126384"
 };
 firebase.initializeApp(config);
+firebase.auth().setPersistence('local').catch(err => {
+  console.error(err);
+});
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 export default firebase;

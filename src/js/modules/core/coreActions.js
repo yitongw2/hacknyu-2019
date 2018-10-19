@@ -28,6 +28,12 @@ export const logout = () => dispatch => {
   });
 };
 
+// Directly add user for rehydrating from localStorage
+export const addUser = user => ({
+  type: LOGIN_FULFILLED,
+  payload: user
+});
+
 export const login = () => dispatch => {
   auth.signInWithPopup(provider)
   .then(result => {

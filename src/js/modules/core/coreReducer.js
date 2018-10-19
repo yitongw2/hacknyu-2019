@@ -44,10 +44,12 @@ const reducer = (state = { ...initialState }, action) => {
         return Object.assign({ ...state }, { viewportWidth, viewportHeight });
       } else return state; //otherwise do not mutate
     case LOGIN_FULFILLED:
+      localStorage.setItem('user', JSON.stringify(action.payload));
       return { ...state, user: action.payload };
     case LOGIN_REJECTED:
       return { ...state, error: action.payload };
     case LOGOUT_FULFILLED:
+      localStorage.removeItem('user');
       return { ...state, user: null };
     case LOGOUT_REJECTED:
       return { ...state, error: action.payload };

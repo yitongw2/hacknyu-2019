@@ -15,5 +15,7 @@ export interface Theme {
   secondBackground: string;
   fontColor: string;
   secondFont: string;
+  secondFontHover: string;
   highlightColor: string;
+  highlightColorHover: string;
 }
