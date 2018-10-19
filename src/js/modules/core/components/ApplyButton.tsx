@@ -16,8 +16,8 @@ interface Props {
 const styles = (theme: Theme): Styles => ({
   apply: {
     marginTop: "45px",
-    padding: "20px",
-    fontSize: "2.5em",
+    padding: "10px 20px 10px 20px",
+    fontSize: "2.25em",
     fontVariant: "small-caps",
     backgroundColor: theme.highlightColor,
     color: theme.secondFont,
