@@ -43,7 +43,10 @@ const styles = (theme: Theme): Styles => ({
     backgroundColor: theme.highlightColor,
     fontSize: "1em",
     border: "none",
-    color: theme.secondFont
+    color: theme.secondFont,
+    '&:disabled': {
+      backgroundColor: theme.highlightColorHover,
+    }
   }
 });
 
@@ -63,6 +66,7 @@ class ApplyPage extends React.Component<Props> {
   handleSubmit = (values: [string]) => {
     console.log(values);
   };
+
   render() {
     let { classes } = this.props;
     return (
@@ -74,31 +78,42 @@ class ApplyPage extends React.Component<Props> {
             <div className={classes.form}>
               <form onSubmit={handleSubmit}>
                 <div className={classes.inputs}>
-                <label>
-                  First Name:
-                  <Field
-                    className={classes.input}
-                    name="firstName"
-                    component="input"
-                    placeholder="Rose"
-                  />
-                </label>
-                <label>
-                  Last Name:
-                  <Field
-                    className={classes.input}
-                    name="lastName"
-                    component="input"
-                    placeholder="Kolodny"
-                  />
-                </label>
-                <button
-                  className={classes.submit}
-                  type="submit"
-                  disabled={pristine || invalid}
-                >
-                  Submit
-                </button>
+                  <label>
+                    First Name:
+                    <Field
+                      className={classes.input}
+                      name="firstName"
+                      component="input"
+                      placeholder="Rose"
+                    />
+                  </label>
+                  <label>
+                    Last Name:
+                    <Field
+                      className={classes.input}
+                      name="lastName"
+                      component="input"
+                      placeholder="Kolodny"
+                    />
+                  </label>
+                  <label>
+                    Date of Birth:
+                    <Field
+                      id="date"
+                      name="birthDate"
+                      label="Date Of Birth"
+                      type="date"
+                      className={classes.input}
+                      component="input"
+                    />
+                  </label>
+                  <button
+                    className={classes.submit}
+                    type="submit"
+                    disabled={pristine || invalid}
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>
