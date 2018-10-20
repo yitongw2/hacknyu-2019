@@ -8,10 +8,12 @@ const styles: Styles = {
     // @ts-ignore
     backgroundColor: props => props.color,
     fontFamily: "Helvetica, sans-serif",
-    width: "80px",
-    height: "80px",
+    // @ts-ignore
+    width: props => (props.radius * 2),
+    // @ts-ignore
+    height: props => (props.radius * 2),
     borderRadius: "80px",
-    fontSize: "50px",
+    fontSize: "1.2em",
     color: "white",
     display: "flex",
     alignItems: "center",
@@ -19,7 +21,7 @@ const styles: Styles = {
     lineHeight: "85px",
     fontWeight: 800,
     float: "left",
-    margin: "20px",
+    margin: "10px",
     transition: "all .2s ease-in-out",
     '&:hover': {
       transform: "scale(1.5)"
@@ -28,6 +30,7 @@ const styles: Styles = {
 };
 interface Props {
   color: string;
+  radius: number;
   children: ReactNode;
   classes: { [s: string]: string }
 }

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { login, logout } from "../coreActions";
 import { User } from "firebase";
 import { Theme } from "../../types";
-import Avatar from "./Avatar";
 
 const styles = (theme: Theme): Styles => ({
   Header: {
@@ -58,7 +57,8 @@ const styles = (theme: Theme): Styles => ({
   },
   "@media (max-width: 800px)": {
     Header: {
-      flexDirection: "column"
+      flexDirection: "column",
+      minHeight: "200px"
     },
     headerText: {
       maxWidth: "80%",

@@ -18,4 +18,5 @@ export interface Theme {
   secondFontHover: string;
   highlightColor: string;
   highlightColorHover: string;
+  formBackground: string;
 }

@@ -2,14 +2,15 @@ import * as React from "react";
 import { ReactNode } from "react";
 import injectSheet, { Styles } from "react-jss";
 import { withRouter } from "react-router-dom";
-import {compose } from "redux";
+import { compose } from "redux";
 import { connect } from "react-redux";
-import {State, Theme} from "../../types";
+import { State, Theme } from "../../types";
 // @ts-ignore
 import { addUser } from "../coreActions";
 import Header from "./Header";
-import {User} from "firebase";
+import { User } from "firebase";
 import UserInfo from "./UserInfo";
+import { auth } from "../../../firebase";
 
 const styles = (theme: Theme): Styles => ({
   app: {
@@ -36,17 +37,18 @@ interface Props {
 
 class MainApp extends React.Component<Props> {
   componentDidMount() {
-    const user = localStorage.getItem('user');
-    if (user) {
-      this.props.addUser(JSON.parse(user));
-    }
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.props.addUser(user);
+      }
+    });
   }
   render() {
-    let {classes, error, children, user} = this.props;
+    let { classes, error, children, user } = this.props;
     return (
       <div className={classes.app}>
-        <Header/>
-        {user && <UserInfo user={user}/>}
+        <Header />
+        {user && <UserInfo user={user} />}
         {error && <h2 className={classes.error}> {error} </h2>}
         {children}
       </div>

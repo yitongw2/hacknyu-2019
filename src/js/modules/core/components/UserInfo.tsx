@@ -23,6 +23,12 @@ const styles = (theme: Theme): Styles => ({
   },
   greeting: {
     maxWidth: "150px"
+  },
+  "@media (max-width: 800px)": {
+    UserInfo: {
+      bottom: "0",
+      top: "auto"
+    }
   }
 })
 

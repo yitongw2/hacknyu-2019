@@ -15,6 +15,7 @@ const theme: Theme = {
   secondFontHover: "#f0f0f0",
   highlightColor: "#db5461",
   highlightColorHover: "#b4505a",
+  formBackground: "#fafafa",
 };
 
 const ThemeInjector: React.SFC<Props> = ({ children }) => {

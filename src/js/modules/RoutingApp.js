@@ -8,6 +8,7 @@ import SignUpPage from "./core/components/SignUpPage";
 import { ConnectedRouter } from "react-router-redux";
 import store from "../store";
 import ThemeInjector from "./ThemeInjector";
+import ApplyPage from './core/components/ApplyPage'
 
 class RoutingApp extends Component {
   render() {
@@ -18,6 +19,7 @@ class RoutingApp extends Component {
             <MainApp>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/signup" component={SignUpPage} />
+              <Route exact path="/apply" component={ApplyPage} />
             </MainApp>
           </ThemeInjector>
         </ConnectedRouter>
