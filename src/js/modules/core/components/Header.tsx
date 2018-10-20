@@ -9,6 +9,7 @@ import { Theme } from "../../types";
 
 const styles = (theme: Theme): Styles => ({
   Header: {
+    minHeight: "300px",
     width: "100%",
     height: "100%",
     display: "flex",

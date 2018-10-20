@@ -1,9 +1,12 @@
 import * as React from "react";
 import injectSheet, { Styles } from "react-jss";
-import { Theme } from "../../types";
+import { State, Theme } from "../../types";
 import SubwayLine from "./SubwayLine";
 import ApplyButton from "./ApplyButton";
 import TrackInfo from "./TrackInfo";
+import Timeline from "./Timeline";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 const styles = (theme: Theme): Styles => ({
   HomePage: {
@@ -28,14 +31,16 @@ const styles = (theme: Theme): Styles => ({
     justifyContent: "center",
     padding: "20px 0 0 0",
     width: "100%"
-  },
+  }
 });
 
 interface Props {
   classes: { [s: string]: string };
+  viewportWidth: number;
 }
 
-const HomePage: React.SFC<Props> = ({ classes }) => {
+const HomePage: React.SFC<Props> = ({ classes, viewportWidth }) => {
+  console.log(viewportWidth);
   return (
     <div className={classes.HomePage}>
       <ApplyButton />
@@ -46,10 +51,15 @@ const HomePage: React.SFC<Props> = ({ classes }) => {
         <SubwayLine delay="-2.4s" color="orange" />
       </div>
       <div className={classes.secondContent}>
-        <TrackInfo/>
+        <TrackInfo />
+        {/*viewportWidth > 800 && <Timeline />*/}
       </div>
     </div>
   );
 };
 
-export default injectSheet(styles)(HomePage);
+const mapStateToProps = (state: State) => ({
+  viewportWidth: state.core.viewportWidth
+});
+
+export default compose(injectSheet(styles), connect(mapStateToProps))(HomePage);
