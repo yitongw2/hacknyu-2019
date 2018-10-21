@@ -18,7 +18,6 @@ const styles = (theme: Theme): Styles => ({
     color: theme.fontColor,
     transition: "background-color 2s, font-color 2s",
     fontFamily: "mr-eaves-xl-modern, sans-serif",
-    height: "100%",
     width: "100%",
     display: "flex",
     flexDirection: "column",

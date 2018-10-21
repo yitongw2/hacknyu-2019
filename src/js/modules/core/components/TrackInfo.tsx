@@ -2,10 +2,12 @@ import * as React from "react";
 import SubwayIcon from "./SubwayIcon";
 import { Styles } from "react-jss";
 import injectSheet from "react-jss/lib/injectSheet";
+import {Theme} from "../../types";
 
-const styles: Styles = {
+const styles = (theme: Theme): Styles => ({
   TrackInfo: {
     fontSize: "2em",
+    backgroundColor: theme.secondBackground,
     margin: "0 5% 0 5%"
   },
   track: {
@@ -24,7 +26,7 @@ const styles: Styles = {
   bullet: {
     padding: "10px"
   }
-};
+});
 
 interface Props {
   classes: { [s: string]: string };

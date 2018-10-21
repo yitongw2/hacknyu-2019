@@ -17,6 +17,7 @@ const styles = (theme: Theme): Styles => ({
     width: "100%"
   },
   secondContent: {
+    display: "flex",
     padding: "5% 0 5% 0",
     width: "100%",
     height: "100%",
@@ -52,7 +53,7 @@ const HomePage: React.SFC<Props> = ({ classes, viewportWidth }) => {
       </div>
       <div className={classes.secondContent}>
         <TrackInfo />
-        {/*viewportWidth > 800 && <Timeline />*/}
+        {viewportWidth > 800 && <Timeline />}
       </div>
     </div>
   );
