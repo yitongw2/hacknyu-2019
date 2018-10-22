@@ -60,6 +60,7 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
+    "@researchgate/react-intersection-observer": "^0.7.3",
     "@types/firebase": "^3.2.1",
     "@types/react": "^16.4.16",
     "@types/react-jss": "^8.6.0",

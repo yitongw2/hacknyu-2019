@@ -35,29 +35,47 @@ const styles = (theme: Theme): Styles => ({
   }
 });
 
-interface Props {
+interface HomePageProps {
   classes: { [s: string]: string };
   viewportWidth: number;
 }
 
-const HomePage: React.SFC<Props> = ({ classes, viewportWidth }) => {
-  console.log(viewportWidth);
-  return (
-    <div className={classes.HomePage}>
-      <ApplyButton />
-      <div className={classes.lines}>
-        <SubwayLine delay="-1.2s" color="#6dc066" />
-        <SubwayLine delay="-1.6s" color="red" />
-        <SubwayLine delay="-2s" color="#007fcc" />
-        <SubwayLine delay="-2.4s" color="orange" />
+interface HomePageState {
+  activeTrack: number;
+}
+
+class HomePage extends React.Component<HomePageProps, HomePageState> {
+  constructor(props: HomePageProps) {
+    super(props);
+    this.state = {
+      activeTrack: null
+    }
+  }
+
+  updateActiveTrack = (id: number) => {
+    console.log(`ACTIVE TRACK IS ${id}`);
+    this.setState({ activeTrack: id })
+  };
+
+  render() {
+    let {classes, viewportWidth} = this.props;
+    return (
+      <div className={classes.HomePage}>
+        <ApplyButton/>
+        <div className={classes.lines}>
+          <SubwayLine delay="-1.2s" color="#6dc066"/>
+          <SubwayLine delay="-1.6s" color="red"/>
+          <SubwayLine delay="-2s" color="#007fcc"/>
+          <SubwayLine delay="-2.4s" color="orange"/>
+        </div>
+        <div className={classes.secondContent}>
+          <TrackInfo updateActiveTrack={this.updateActiveTrack}/>
+          {viewportWidth > 800 && <Timeline activeTrack={this.state.activeTrack}/>}
+        </div>
       </div>
-      <div className={classes.secondContent}>
-        <TrackInfo />
-        {viewportWidth > 800 && <Timeline />}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   viewportWidth: state.core.viewportWidth

@@ -13,7 +13,7 @@ const styles: Styles = {
     // @ts-ignore
     height: props => (props.radius * 2),
     borderRadius: "80px",
-    fontSize: "0.75em",
+    fontSize: "0.65em",
     color: "white",
     display: "flex",
     alignItems: "center",
