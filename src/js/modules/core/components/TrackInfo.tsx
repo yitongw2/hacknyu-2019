@@ -61,13 +61,13 @@ const TrackInfo: React.SFC<Props> = ({ classes }) => {
         key={0}
         name="Heathcare"
         icons={[
-          <SubwayIcon color="red" radius={15}>
+          <SubwayIcon key={1} color="red" radius={15}>
             1
           </SubwayIcon>,
-          <SubwayIcon color="red" radius={15}>
+          <SubwayIcon key={2} color="red" radius={15}>
             2
           </SubwayIcon>,
-          <SubwayIcon color="red" radius={15}>
+          <SubwayIcon key={3} color="red" radius={15}>
             3
           </SubwayIcon>
         ]}
@@ -102,13 +102,13 @@ const TrackInfo: React.SFC<Props> = ({ classes }) => {
         key={1}
         name="Sustainability and Social Impact"
         icons={[
-          <SubwayIcon color="#6dc066" radius={15}>
+          <SubwayIcon key={1} color="#6dc066" radius={15}>
             4
           </SubwayIcon>,
-          <SubwayIcon color="#6dc066" radius={15}>
+          <SubwayIcon key={2} color="#6dc066" radius={15}>
             5
           </SubwayIcon>,
-          <SubwayIcon color="#6dc066" radius={15}>
+          <SubwayIcon key={3} color="#6dc066" radius={15}>
             6
           </SubwayIcon>
         ]}
@@ -143,13 +143,13 @@ const TrackInfo: React.SFC<Props> = ({ classes }) => {
         key={2}
         name="Education"
         icons={[
-          <SubwayIcon color="#007fcc" radius={15}>
+          <SubwayIcon key={1} color="#007fcc" radius={15}>
             A
           </SubwayIcon>,
-          <SubwayIcon color="#007fcc" radius={15}>
+          <SubwayIcon key={2} color="#007fcc" radius={15}>
             C
           </SubwayIcon>,
-          <SubwayIcon color="#007fcc" radius={15}>
+          <SubwayIcon key={3} color="#007fcc" radius={15}>
             E
           </SubwayIcon>
         ]}
@@ -187,16 +187,16 @@ const TrackInfo: React.SFC<Props> = ({ classes }) => {
         key={3}
         name={"Accessibility & Assistive Technology"}
         icons={[
-          <SubwayIcon color="orange" radius={15}>
+          <SubwayIcon key={1} color="orange" radius={15}>
             B
           </SubwayIcon>,
-          <SubwayIcon color="orange" radius={15}>
+          <SubwayIcon key={2} color="orange" radius={15}>
             D
           </SubwayIcon>,
-          <SubwayIcon color="orange" radius={15}>
+          <SubwayIcon key={3} color="orange" radius={15}>
             F
           </SubwayIcon>,
-          <SubwayIcon color="orange" radius={15}>
+          <SubwayIcon key={4} color="orange" radius={15}>
             M
           </SubwayIcon>
         ]}

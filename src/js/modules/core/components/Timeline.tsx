@@ -21,8 +21,8 @@ const colors = ["red", "#6dc066", "#007fcc", "orange"];
 const Timeline: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.Timeline}>
-      {colors.map((color) => {
-          return <Line color={color} />;
+      {colors.map((color, index) => {
+          return <Line color={color} key={index} />;
       })}
     </div>
   );
