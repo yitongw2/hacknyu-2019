@@ -4,7 +4,24 @@ import { Styles } from "react-jss";
 import injectSheet from "react-jss/lib/injectSheet";
 import { Theme } from "../../types";
 import Track from "./Track";
-//import "intersection-observer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMedkit,
+  faHeartbeat,
+  faPrescription,
+  faRunning,
+  faSolarPanel,
+  faTree,
+  faGlobeAmericas,
+  faBullhorn,
+  faGraduationCap,
+  faLaptop,
+  faChalkboardTeacher,
+  faCode,
+  faUniversalAccess,
+  faHandPointer, faComment,
+} from "@fortawesome/free-solid-svg-icons";
+import { faAccessibleIcon  } from "@fortawesome/free-brands-svg-icons"
 
 const styles = (theme: Theme): Styles => ({
   TrackInfo: {
@@ -16,22 +33,32 @@ const styles = (theme: Theme): Styles => ({
     maxWidth: "800px"
   },
   bullet: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexDirection: "row",
     padding: "10px"
+  },
+  icon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    minWidth: "50px",
+    paddingRight: "20px"
   }
 });
 
 interface Props {
   classes: { [s: string]: string };
-  updateActiveTrack: (n: number) => void;
 }
-const TrackInfo: React.SFC<Props> = ({ classes, updateActiveTrack }) => {
+const TrackInfo: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.TrackInfo}>
       <h2> Join A Track </h2>
       <Track
         id={0}
         key={0}
-        updateActiveTrack={updateActiveTrack}
         name="Heathcare"
         icons={[
           <SubwayIcon color="red" radius={15}>
@@ -45,27 +72,34 @@ const TrackInfo: React.SFC<Props> = ({ classes, updateActiveTrack }) => {
           </SubwayIcon>
         ]}
       >
-        <li className={classes.bullet}>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-          hendrerit tempor tellus. Donec pretium posuere tellus.
-        </li>
-        <li className={classes.bullet}>
-          Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur
-          ridiculus mus.
-        </li>
-        <li className={classes.bullet}>
-          Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis.
-        </li>
-        <li className={classes.bullet}>
-          Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan
-          nisl.
-        </li>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faMedkit} />
+          </div>
+          Find new and innovative healthcare solutions.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faHeartbeat} />
+          </div>
+          Disrupt the way we distribute and pratice medicine.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faPrescription} />
+          </div>
+          Ensure millions get the healthcare and service they deserve.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faRunning} />
+          </div>
+          Educate people on staying active and healthy.
+        </div>
       </Track>
       <Track
         id={1}
         key={1}
-        updateActiveTrack={updateActiveTrack}
         name="Sustainability and Social Impact"
         icons={[
           <SubwayIcon color="#6dc066" radius={15}>
@@ -79,27 +113,34 @@ const TrackInfo: React.SFC<Props> = ({ classes, updateActiveTrack }) => {
           </SubwayIcon>
         ]}
       >
-        <li className={classes.bullet}>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-          hendrerit tempor tellus. Donec pretium posuere tellus.
-        </li>
-        <li className={classes.bullet}>
-          Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur
-          ridiculus mus.
-        </li>
-        <li className={classes.bullet}>
-          Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis.
-        </li>
-        <li className={classes.bullet}>
-          Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan
-          nisl.
-        </li>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faTree} />
+          </div>
+          Teach people how to be environmentally conscious.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faSolarPanel} />
+          </div>
+          Invent new ways to create and distribute clean energy.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faGlobeAmericas} />
+          </div>
+          Have your hack change the world for the better.
+        </div>
+        <div className={classes.bullet}>
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faBullhorn} />
+          </div>
+          Raise awareness about important social issues.
+        </div>
       </Track>
       <Track
         id={2}
         key={2}
-        updateActiveTrack={updateActiveTrack}
         name="Education"
         icons={[
           <SubwayIcon color="#007fcc" radius={15}>
@@ -113,29 +154,37 @@ const TrackInfo: React.SFC<Props> = ({ classes, updateActiveTrack }) => {
           </SubwayIcon>
         ]}
       >
-        <ul className={classes.description}>
-          <li className={classes.bullet}>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-            hendrerit tempor tellus. Donec pretium posuere tellus.
-          </li>
-          <li className={classes.bullet}>
-            Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.
-            Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </li>
-          <li className={classes.bullet}>
-            Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis.
-          </li>
-          <li className={classes.bullet}>
-            Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan
-            nisl.
-          </li>
-        </ul>
+        <div className={classes.description}>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faGraduationCap} />
+            </div>
+            Help educate the next generation of students.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faLaptop} />
+            </div>
+            Hack student engagement with technology.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faChalkboardTeacher} />
+            </div>
+            Work with teachers and educators to bring the classroom into the
+            21st century.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faCode} />
+            </div>
+            Spread tech knowledge to underrepresented minorities.
+          </div>
+        </div>
       </Track>
       <Track
         id={3}
         key={3}
-        updateActiveTrack={updateActiveTrack}
         name={"Accessibility & Assistive Technology"}
         icons={[
           <SubwayIcon color="orange" radius={15}>
@@ -152,24 +201,34 @@ const TrackInfo: React.SFC<Props> = ({ classes, updateActiveTrack }) => {
           </SubwayIcon>
         ]}
       >
-        <ul className={classes.description}>
-          <li className={classes.bullet}>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-            hendrerit tempor tellus. Donec pretium posuere tellus.
-          </li>
-          <li className={classes.bullet}>
-            Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.
-            Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </li>
-          <li className={classes.bullet}>
-            Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis.
-          </li>
-          <li className={classes.bullet}>
-            Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan
-            nisl.
-          </li>
-        </ul>
+        <div className={classes.description}>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faComment}/>
+            </div>
+            Collaborate with different fields to help people in their day to day
+            lives.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faHandPointer}/>
+            </div>
+            Design intuitive and innovative ways to interact with technology.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faAccessibleIcon}/>
+            </div>
+            Combine medicine, occupational therapy and engineering to build new
+            products.
+          </div>
+          <div className={classes.bullet}>
+            <div className={classes.icon}>
+              <FontAwesomeIcon icon={faUniversalAccess}/>
+            </div>
+            Change people's lives and tackle a diverse set of challenges.
+          </div>
+        </div>
       </Track>
     </div>
   );

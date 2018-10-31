@@ -1,14 +1,11 @@
 import * as React from "react";
-import SubwayIcon from "./SubwayIcon";
 import {ReactNode, ReactNodeArray} from "react";
 import { Styles } from "react-jss";
 import injectSheet from "react-jss/lib/injectSheet";
-import Observer from "@researchgate/react-intersection-observer";
 
 
 interface Props {
   id: number;
-  updateActiveTrack: (n: number) => void;
   classes: { [s: string]: string };
   icons: ReactNodeArray,
   name: string;
@@ -28,14 +25,8 @@ const styles: Styles = {
   },
 };
 
-const Track: React.SFC<Props> = ({ id, updateActiveTrack, classes, icons, children, name }) => {
-  const handleChange = (event: IntersectionObserverEntry) => {
-    if (event.isIntersecting) {
-      updateActiveTrack(id)
-    }
-  }
+const Track: React.SFC<Props> = ({ id, classes, icons, children, name }) => {
   return (
-    <Observer onChange={handleChange} rootMargin="0% 0% -60%">
     <div className={classes.Track}>
       <div className={classes.subwayIcons}>
         {icons}
@@ -43,7 +34,6 @@ const Track: React.SFC<Props> = ({ id, updateActiveTrack, classes, icons, childr
       <h3> {name} </h3>
       <ul className={classes.description}>{children}</ul>
     </div>
-    </Observer>
   );
 };
 

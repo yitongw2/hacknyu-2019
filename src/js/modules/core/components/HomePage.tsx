@@ -40,22 +40,11 @@ interface HomePageProps {
   viewportWidth: number;
 }
 
-interface HomePageState {
-  activeTrack: number;
-}
 
-class HomePage extends React.Component<HomePageProps, HomePageState> {
+class HomePage extends React.Component<HomePageProps> {
   constructor(props: HomePageProps) {
     super(props);
-    this.state = {
-      activeTrack: null
-    }
   }
-
-  updateActiveTrack = (id: number) => {
-    console.log(`ACTIVE TRACK IS ${id}`);
-    this.setState({ activeTrack: id })
-  };
 
   render() {
     let {classes, viewportWidth} = this.props;
@@ -69,8 +58,8 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
           <SubwayLine delay="-2.4s" color="orange"/>
         </div>
         <div className={classes.secondContent}>
-          <TrackInfo updateActiveTrack={this.updateActiveTrack}/>
-          {viewportWidth > 800 && <Timeline activeTrack={this.state.activeTrack}/>}
+          <TrackInfo />
+          {viewportWidth > 800 && <Timeline/>}
         </div>
       </div>
     );
