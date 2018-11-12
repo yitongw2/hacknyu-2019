@@ -107,6 +107,37 @@ class ApplyPage extends React.Component<Props> {
                       component="input"
                     />
                   </label>
+                  <label>
+                    Phone Number:
+                    <Field
+                      name="phoneNumber"
+                      label="Phone Number"
+                      className={classes.input}
+                      component="input"
+                      type="tel"
+                      placeholder="1-800-867-5309"
+                    />
+                  </label>
+                  <label>
+                    School:
+                    <Field
+                      className={classes.input}
+                      name="school"
+                      label="School"
+                      component="input"
+                      placeholder="South Harmon Institute of Technology"
+                    />
+                  </label>
+                  <label>
+                    Gender:
+                    <Field name="gender" component="select" className={classes.input}>
+                      <option value="male"> Male </option>
+                      <option value="female"> Female </option>
+                      <option value="non-binary"> Non-binary </option>
+                      <option value="prefer-not"> Prefer not to say </option>
+                      <option value="other"> Other </option>
+                    </Field>
+                  </label>
                   <button
                     className={classes.submit}
                     type="submit"

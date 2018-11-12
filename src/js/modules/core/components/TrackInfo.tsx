@@ -46,6 +46,14 @@ const styles = (theme: Theme): Styles => ({
     height: "100%",
     minWidth: "50px",
     paddingRight: "20px"
+  },
+  "@media (max-width: 800px)": {
+    header: {
+      paddingLeft: "20px"
+    },
+    TrackInfo: {
+      margin: "0 3% 15% 3%"
+    }
   }
 });
 
@@ -55,7 +63,7 @@ interface Props {
 const TrackInfo: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.TrackInfo}>
-      <h2> Join A Track </h2>
+      <h2 className={classes.header}> Join A Track </h2>
       <Track
         id={0}
         key={0}

@@ -1,17 +1,14 @@
 import * as React from "react";
 import injectSheet, { Styles } from "react-jss/lib/injectSheet";
-import { State, Theme} from "../../types";
+import { State, Theme } from "../../types";
 import { Link } from "react-router-dom";
 import { User } from "firebase";
 import { compose } from "redux";
 import { connect } from "react-redux";
-// @ts-ignore
-import {login } from "../coreActions"
 
 interface Props {
   classes: { [s: string]: string };
   user: User;
-  login: () => any;
 }
 const styles = (theme: Theme): Styles => ({
   apply: {
@@ -27,7 +24,7 @@ const styles = (theme: Theme): Styles => ({
     }
   }
 });
-const ApplyButton: React.SFC<Props> = ({ user, login, classes }) => {
+const ApplyButton: React.SFC<Props> = ({ user, classes }) => {
   if (user) {
     return (
       <Link to="/apply">
@@ -36,9 +33,9 @@ const ApplyButton: React.SFC<Props> = ({ user, login, classes }) => {
     );
   }
   return (
-    <div onClick={login} className={classes.apply}>
-      Apply
-    </div>
+    <Link to="/login">
+      <div className={classes.apply}>Apply</div>
+    </Link>
   );
 };
 
@@ -46,11 +43,7 @@ const mapStateToProps = (state: State) => ({
   user: state.core.user
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-  login: () => {
-    dispatch(login());
-  }
-});
-export default compose(injectSheet(styles), connect(mapStateToProps, mapDispatchToProps))(
-  ApplyButton
-);
+export default compose(
+  injectSheet(styles),
+  connect(mapStateToProps)
+)(ApplyButton);

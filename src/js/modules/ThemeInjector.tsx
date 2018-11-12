@@ -16,6 +16,7 @@ const theme: Theme = {
   highlightColor: "#db5461",
   highlightColorHover: "#b4505a",
   formBackground: "#fafafa",
+  submitButton: "#46a2b0"
 };
 
 const ThemeInjector: React.SFC<Props> = ({ children }) => {

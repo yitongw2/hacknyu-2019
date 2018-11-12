@@ -23,6 +23,14 @@ const styles: Styles = {
     flexWrap: "wrap",
     flexDirection: "row"
   },
+  name: {
+    paddingBottom: "25px"
+  },
+  "@media (max-width: 800px)": {
+    description: {
+      padding: "0"
+    }
+  }
 };
 
 const Track: React.SFC<Props> = ({ id, classes, icons, children, name }) => {
@@ -31,8 +39,8 @@ const Track: React.SFC<Props> = ({ id, classes, icons, children, name }) => {
       <div className={classes.subwayIcons}>
         {icons}
       </div>
-      <h3> {name} </h3>
-      <ul className={classes.description}>{children}</ul>
+      <h3 className={classes.name}> {name} </h3>
+      <div className={classes.description}>{children}</div>
     </div>
   );
 };
