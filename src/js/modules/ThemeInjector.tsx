@@ -11,6 +11,7 @@ const theme: Theme = {
   backgroundColor: "#e3f2fd",
   fontColor: "#363731",
   secondBackground: "#416788",
+  thirdBackground: "#2b4570",
   secondFont: "#fafafa",
   secondFontHover: "#f0f0f0",
   highlightColor: "#db5461",

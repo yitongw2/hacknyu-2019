@@ -26,7 +26,6 @@ import { faAccessibleIcon  } from "@fortawesome/free-brands-svg-icons"
 const styles = (theme: Theme): Styles => ({
   TrackInfo: {
     fontSize: "2em",
-    backgroundColor: theme.secondBackground,
     margin: "0 5% 0 5%"
   },
   description: {

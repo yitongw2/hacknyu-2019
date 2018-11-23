@@ -34,4 +34,5 @@ const Button: React.SFC<Props> = ({ classes, children, ...props }) => {
   )
 }
 
+//@ts-ignore
 export default injectSheet(styles)(Button);

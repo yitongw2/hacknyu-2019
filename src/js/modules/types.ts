@@ -13,6 +13,7 @@ export interface CoreState {
 export interface Theme {
   backgroundColor: string;
   secondBackground: string;
+  thirdBackground: string;
   fontColor: string;
   secondFont: string;
   secondFontHover: string;

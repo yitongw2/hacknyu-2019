@@ -19,7 +19,8 @@ const styles = (theme: Theme): Styles => ({
     padding: "10px 10px 10px 20px",
     position: "fixed",
     top: "0",
-    right: "0"
+    right: "0",
+    boxShadow: "-1px 1px 12px -2px rgba(0,0,0,0.75)"
   },
   greeting: {
     maxWidth: "150px"
