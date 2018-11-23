@@ -16,7 +16,7 @@ const styles = (theme: Theme): Styles => ({
     display: "flex"
   },
   intro: {
-    width: "600px"
+    width: "800px"
   },
   image: {
     maxWidth: "600px"

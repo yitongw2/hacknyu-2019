@@ -14,10 +14,9 @@ const styles = (theme: Theme): Styles => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: theme.backgroundColor,
-    alignItems: "center",
-    width: "100%"
+    alignItems: "center"
   },
-  secondSection: {
+  firstSection: {
     display: "flex",
     flexDirection: "column",
     padding: "5% 0 5% 0",
@@ -26,16 +25,19 @@ const styles = (theme: Theme): Styles => ({
     backgroundColor: theme.secondBackground,
     color: theme.secondFont
   },
-  thirdSection: {
+  secondSection: {
     display: "flex",
     flexDirection: "column",
     padding: "5% 0 5% 0",
     width: "100%",
     height: "100%",
-    backgroundColor: theme.highlightColor,
+    minHeight: "600px",
+    background: `linear-gradient(${theme.secondBackground}, ${
+      theme.thirdBackground
+    })`,
     color: theme.secondFont
   },
-  fourthSection: {
+  thirdSection: {
     display: "flex",
     flexDirection: "column",
     padding: "5% 0 5% 0",
@@ -58,11 +60,19 @@ const styles = (theme: Theme): Styles => ({
     margin: "0 5% 0 5%",
     maxWidth: "400px"
   },
+  secondary: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  info: {
+    display: "flex",
+    flexDirection: "column"
+  },
   quoteAuthor: {
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "flex-end"
-  }
+  },
 });
 
 interface HomePageProps {
@@ -86,19 +96,17 @@ class HomePage extends React.Component<HomePageProps> {
           <SubwayLine delay="-2s" color="#007fcc" />
           <SubwayLine delay="-2.4s" color="orange" />
         </div>
-        <div className={classes.secondSection}>
+        <div className={classes.firstSection}>
           <AboutSection />
         </div>
-        {/*<div className={classes.thirdSection}>
+        <div className={classes.secondSection}>
           <div className={classes.quote}>
             <p>Inspirational quote here!</p>
             <span className={classes.quoteAuthor}> --- Albert Einstein </span>
           </div>
-        </div>*/}
-        <div className={classes.fourthSection}>
+        </div>
+        <div className={classes.thirdSection}>
           <TrackInfo />
-
-          {viewportWidth > 800 && <Timeline />}
         </div>
       </div>
     );
