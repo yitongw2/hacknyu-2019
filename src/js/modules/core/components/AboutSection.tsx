@@ -5,21 +5,25 @@ import {Theme} from "../../types";
 interface Props {
   classes: { [s: string]: string };
 }
-const styles = (theme: Theme): Styles => ({
+const styles = (_theme: Theme): Styles => ({
   AboutSection: {
     display: "flex",
     flexDirection: "column",
-    fontSize: "2em",
     margin: "0 5% 0 5%"
   },
   content: {
-    display: "flex"
+    display: "flex",
+    flexWrap: "wrap",
   },
   intro: {
-    width: "800px"
+    fontSize: "1.5em",
+    maxWidth: "800px"
+  },
+  title: {
+    fontSize: "2em"
   },
   image: {
-    maxWidth: "600px"
+    maxWidth: "700px"
   },
   imageContainer: {
     display: "flex",
@@ -34,7 +38,7 @@ const styles = (theme: Theme): Styles => ({
 const AboutSection: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.AboutSection}>
-      <h1> About </h1>
+      <h1 className={classes.title}> About </h1>
       <div className={classes.content}>
         <p className={classes.intro}>
           HackNYU is NYU's annual hackathon. It takes place simultaneously in

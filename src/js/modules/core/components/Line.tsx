@@ -5,8 +5,8 @@ import injectSheet from "react-jss/lib/injectSheet";
 const styles: Styles = {
   line: {
     height: "100%",
-    width: "30px",
-    marginRight: "30px",
+    width: "20px",
+    marginRight: "10px",
     // @ts-ignore
     backgroundColor: props => props.color
   }

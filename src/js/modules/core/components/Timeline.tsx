@@ -2,15 +2,17 @@ import * as React from "react";
 import { Styles } from "react-jss";
 import injectSheet from "react-jss/lib/injectSheet";
 import Line from "./Line";
+import {Theme} from "../../types";
 
-const styles: Styles = {
+const styles = (theme: Theme): Styles => ({
   Timeline: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    width: "50vw"
+    width: "50vw",
+    height: "100%"
   }
-};
+});
 
 interface Props {
   classes: { [s: string]: string };

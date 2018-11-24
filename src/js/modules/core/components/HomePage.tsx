@@ -8,6 +8,7 @@ import Timeline from "./Timeline";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AboutSection from "./AboutSection";
+import Section from "./Section";
 
 const styles = (theme: Theme): Styles => ({
   HomePage: {
@@ -16,33 +17,17 @@ const styles = (theme: Theme): Styles => ({
     backgroundColor: theme.backgroundColor,
     alignItems: "center"
   },
-  firstSection: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "5% 0 5% 0",
-    width: "100%",
-    height: "100%",
+  aboutSection: {
     backgroundColor: theme.secondBackground,
     color: theme.secondFont
   },
-  secondSection: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "5% 0 5% 0",
-    width: "100%",
-    height: "100%",
-    minHeight: "600px",
+  activitiesSection: {
     background: `linear-gradient(${theme.secondBackground}, ${
       theme.thirdBackground
     })`,
     color: theme.secondFont
   },
-  thirdSection: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "5% 0 5% 0",
-    width: "100%",
-    height: "100%",
+  tracksSection: {
     backgroundColor: theme.thirdBackground,
     color: theme.secondFont
   },
@@ -60,19 +45,18 @@ const styles = (theme: Theme): Styles => ({
     margin: "0 5% 0 5%",
     maxWidth: "400px"
   },
-  secondary: {
-    display: "flex",
-    flexDirection: "row"
-  },
   info: {
     display: "flex",
     flexDirection: "column"
+  },
+  timeline: {
+    width: "20vw"
   },
   quoteAuthor: {
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "flex-end"
-  },
+  }
 });
 
 interface HomePageProps {
@@ -96,17 +80,19 @@ class HomePage extends React.Component<HomePageProps> {
           <SubwayLine delay="-2s" color="#007fcc" />
           <SubwayLine delay="-2.4s" color="orange" />
         </div>
-        <div className={classes.firstSection}>
-          <AboutSection />
-        </div>
-        <div className={classes.secondSection}>
-          <div className={classes.quote}>
-            <p>Inspirational quote here!</p>
-            <span className={classes.quoteAuthor}> --- Albert Einstein </span>
-          </div>
-        </div>
-        <div className={classes.thirdSection}>
-          <TrackInfo />
+        <div className={classes.info}>
+          <Section className={classes.aboutSection}>
+            <AboutSection />
+          </Section>
+          <Section className={classes.activitiesSection}>
+            <div className={classes.quote}>
+              <p>Inspirational quote here!</p>
+              <span className={classes.quoteAuthor}>--- Albert Einstein</span>
+            </div>
+          </Section>
+          <Section className={classes.tracksSection}>
+            <TrackInfo />
+          </Section>
         </div>
       </div>
     );

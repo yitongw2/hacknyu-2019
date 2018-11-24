@@ -113,10 +113,10 @@ const Header: React.SFC<Props> = ({
             </a>
           </h1>
         )}
-        <h1 className={classes.learnMore}>
+        <h1 className={classes.aboutUs}>
           <Link to="/about">
             <div className={classes.link}>
-              Learn More{viewportWidth > 800 && (
+              About Us{viewportWidth > 800 && (
                 <div className={classes.dot}>&bull;</div>
               )}
             </div>

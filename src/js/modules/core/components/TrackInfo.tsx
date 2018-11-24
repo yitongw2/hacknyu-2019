@@ -19,9 +19,10 @@ import {
   faChalkboardTeacher,
   faCode,
   faUniversalAccess,
-  faHandPointer, faComment,
+  faHandPointer,
+  faComment
 } from "@fortawesome/free-solid-svg-icons";
-import { faAccessibleIcon  } from "@fortawesome/free-brands-svg-icons"
+import { faAccessibleIcon } from "@fortawesome/free-brands-svg-icons";
 
 const styles = (theme: Theme): Styles => ({
   TrackInfo: {
@@ -62,7 +63,12 @@ interface Props {
 const TrackInfo: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.TrackInfo}>
-      <h2 className={classes.header}> Join A Track </h2>
+      <h1> Tracks </h1>
+      <p>
+        HackNYU has 4 tracks: Healthcare, Sustainability & Social Impact,
+        Education, Accessiblity & Assistive Technology. Each track has its own
+        focuses and judges.
+      </p>
       <Track
         id={0}
         key={0}
@@ -211,27 +217,27 @@ const TrackInfo: React.SFC<Props> = ({ classes }) => {
         <div className={classes.description}>
           <div className={classes.bullet}>
             <div className={classes.icon}>
-              <FontAwesomeIcon icon={faComment}/>
+              <FontAwesomeIcon icon={faComment} />
             </div>
             Collaborate with different fields to help people in their day to day
             lives.
           </div>
           <div className={classes.bullet}>
             <div className={classes.icon}>
-              <FontAwesomeIcon icon={faHandPointer}/>
+              <FontAwesomeIcon icon={faHandPointer} />
             </div>
             Design intuitive and innovative ways to interact with technology.
           </div>
           <div className={classes.bullet}>
             <div className={classes.icon}>
-              <FontAwesomeIcon icon={faAccessibleIcon}/>
+              <FontAwesomeIcon icon={faAccessibleIcon} />
             </div>
             Combine medicine, occupational therapy and engineering to build new
             products.
           </div>
           <div className={classes.bullet}>
             <div className={classes.icon}>
-              <FontAwesomeIcon icon={faUniversalAccess}/>
+              <FontAwesomeIcon icon={faUniversalAccess} />
             </div>
             Change people's lives and tackle a diverse set of challenges.
           </div>
