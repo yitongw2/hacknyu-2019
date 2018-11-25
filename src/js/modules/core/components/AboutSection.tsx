@@ -16,11 +16,11 @@ const styles = (_theme: Theme): Styles => ({
     flexWrap: "wrap",
   },
   intro: {
-    fontSize: "1.5em",
+    fontSize: "1.8em",
     maxWidth: "800px"
   },
   title: {
-    fontSize: "2em"
+    fontSize: "3em"
   },
   image: {
     maxWidth: "700px"

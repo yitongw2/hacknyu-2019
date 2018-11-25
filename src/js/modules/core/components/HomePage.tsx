@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import AboutSection from "./AboutSection";
 import Section from "./Section";
+// @ts-ignore
+import { Scrollama, Step } from "react-scrollama";
 
 const styles = (theme: Theme): Styles => ({
   HomePage: {
@@ -69,8 +71,18 @@ class HomePage extends React.Component<HomePageProps> {
     super(props);
   }
 
+  handleStepEnter = ({
+    element,
+    data,
+    direction
+  }: {
+    element: any;
+    data: any;
+    direction: any;
+  }) => console.log(element, data, direction);
+
   render() {
-    let { classes, viewportWidth } = this.props;
+    let { classes } = this.props;
     return (
       <div className={classes.HomePage}>
         <ApplyButton />
@@ -81,26 +93,38 @@ class HomePage extends React.Component<HomePageProps> {
           <SubwayLine delay="-2.4s" color="orange" />
         </div>
         <div className={classes.info}>
-          <Section className={classes.aboutSection}>
-            <AboutSection />
-          </Section>
-          <Section className={classes.activitiesSection}>
-            <div className={classes.quote}>
-              <p>Inspirational quote here!</p>
-              <span className={classes.quoteAuthor}>--- Albert Einstein</span>
-            </div>
-          </Section>
-          <Section className={classes.tracksSection}>
-            <TrackInfo />
-          </Section>
+          <Scrollama onStepEnter={this.handleStepEnter}>
+            <Step data={0}>
+              <div className={classes.aboutSection}>
+                <Section>
+                  <AboutSection />
+                </Section>
+              </div>
+            </Step>
+            <Step data={1}>
+              <div className={classes.activitiesSection}>
+                <Section>
+                  <div className={classes.quote}>
+                    <p>Inspirational quote here!</p>
+                    <span className={classes.quoteAuthor}>
+                      --- Albert Einstein
+                    </span>
+                  </div>
+                </Section>
+              </div>
+            </Step>
+            <Step data={2}>
+              <div className={classes.tracksSection}>
+                <Section>
+                  <TrackInfo />
+                </Section>
+              </div>
+            </Step>
+          </Scrollama>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: State) => ({
-  viewportWidth: state.core.viewportWidth
-});
-
-export default compose(injectSheet(styles), connect(mapStateToProps))(HomePage);
+export default injectSheet(styles)(HomePage);

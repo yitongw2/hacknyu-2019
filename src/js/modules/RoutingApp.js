@@ -10,7 +10,7 @@ import store from "../store";
 import ThemeInjector from "./ThemeInjector";
 import ApplyPage from './core/components/ApplyPage'
 import LoginPage from './core/components/LoginPage'
-import TracksPage from './core/components/TracksPage'
+import AboutPage from './core/components/AboutPage'
 
 class RoutingApp extends Component {
   render() {
@@ -20,7 +20,7 @@ class RoutingApp extends Component {
           <ThemeInjector>
             <MainApp>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/about" component={TracksPage}/>
+              <Route exact path="/about" component={AboutPage}/>
               <Route exact path="/signup" component={SignUpPage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/apply" component={ApplyPage} />
