@@ -7,6 +7,9 @@ interface Props {
   location: Location;
   children: any;
 }
+
+export const trackColors = {red: "red", orange: "orange", green: "#4ba343", blue: "#007fcc"};
+
 const theme: Theme = {
   backgroundColor: "#e3f2fd",
   fontColor: "#363731",
@@ -17,7 +20,8 @@ const theme: Theme = {
   highlightColor: "#db5461",
   highlightColorHover: "#b4505a",
   formBackground: "#fafafa",
-  submitButton: "#46a2b0"
+  submitButton: "#46a2b0",
+  ...trackColors
 };
 
 const ThemeInjector: React.SFC<Props> = ({ children }) => {

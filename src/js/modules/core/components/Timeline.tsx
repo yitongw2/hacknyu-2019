@@ -3,6 +3,7 @@ import { Styles } from "react-jss";
 import injectSheet from "react-jss/lib/injectSheet";
 import Line from "./Line";
 import {Theme} from "../../types";
+import {trackColors} from "../../ThemeInjector";
 
 const styles = (theme: Theme): Styles => ({
   Timeline: {
@@ -18,12 +19,12 @@ interface Props {
   classes: { [s: string]: string };
 }
 
-const colors = ["red", "#6dc066", "#007fcc", "orange"];
+
 
 const Timeline: React.SFC<Props> = ({ classes }) => {
   return (
     <div className={classes.Timeline}>
-      {colors.map((color, index) => {
+      {Object.values(trackColors).map((color, index) => {
           return <Line color={color} key={index} />;
       })}
     </div>

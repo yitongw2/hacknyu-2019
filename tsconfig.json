@@ -5,6 +5,7 @@
     "lib": [
       "esnext.asynciterable",
       "es2015",
+      "es2017",
       "dom"
     ],
     "jsx": "react"

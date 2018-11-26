@@ -10,21 +10,22 @@ const styles = (theme: Theme): Styles => ({
     display: "flex",
     // @ts-ignore
     position: props =>
-      props.activeBlocks.has(props.id) ? "fixed" : "absolute",
+      props.activeBlocks >= props.id ? "fixed" : "absolute",
     // @ts-ignore
     top: props =>
-      props.activeBlocks.has(props.id) ? `${20 + 20 * props.id}vh` : "auto",
+      props.activeBlocks >= props.id ? `${100 + 180 * props.id}px` : "auto",
     // @ts-ignore
     transform: props =>
-      props.activeBlocks.has(props.id) ? "none" : "translateX(20vw)",
-    transition: "transform 5s, top 5s, display 5s",
+      props.activeBlocks >= props.id ? "none" : "translateX(30vw)",
+    transition: "transform 3s, top 3s, position 8s",
     marginTop: "2vh",
-    right: "10vw",
-    width: "150px",
-    height: "150px",
+    right: "7vw",
+    width: "300px",
+    height: "100px",
     color: theme.secondFont,
     borderRadius: "10px",
-    backgroundColor: theme.highlightColor
+    // @ts-ignore
+    backgroundColor: props => props.color
   },
   text: {
     width: "100px"
@@ -33,9 +34,10 @@ const styles = (theme: Theme): Styles => ({
 
 interface Props {
   classes: { [s: string]: string };
-  activeBlocks: Set<number>;
+  activeBlocks: number;
   id: number;
   text: string;
+  color: string;
 }
 const InfoBlock: React.SFC<Props> = ({ classes, text }) => {
   return (

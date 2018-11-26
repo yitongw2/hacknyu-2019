@@ -20,7 +20,8 @@ const styles = (theme: Theme): Styles => ({
     color: theme.secondFont,
     transition: "color 1s, background-color 1s",
     "&:hover": {
-      backgroundColor: theme.highlightColorHover
+      backgroundColor: theme.highlightColorHover,
+      textDecoration: "none"
     }
   }
 });

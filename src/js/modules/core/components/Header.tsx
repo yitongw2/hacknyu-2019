@@ -27,7 +27,10 @@ const styles = (theme: Theme): Styles => ({
     padding: "20px",
     margin: "0px",
     backgroundColor: theme.highlightColor,
-    color: theme.secondFont
+    color: theme.secondFont,
+    "a:hover": {
+      textDecoration: "none"
+    }
   },
   link: {
     display: "flex",
@@ -72,6 +75,9 @@ const styles = (theme: Theme): Styles => ({
       fontSize: "0.75em",
       padding: "8px"
     }
+  },
+  bullet: {
+    display: "flex"
   }
 });
 
@@ -104,23 +110,21 @@ const Header: React.SFC<Props> = ({
       <div className={classes.links}>
         {!user && (
           <h1 className={classes.signUp}>
-            <a href="#" onClick={login}>
-              <div className={classes.link}>
-                Sign Up{viewportWidth > 800 && (
-                  <div className={classes.dot}>&bull;</div>
-                )}
-              </div>
-            </a>
+            <span className={classes.bullet}>
+              <a href="#" onClick={login}>
+                <div className={classes.link}>Sign Up</div>
+              </a>
+              {viewportWidth > 800 && <div className={classes.dot}>&bull;</div>}
+            </span>
           </h1>
         )}
         <h1 className={classes.aboutUs}>
-          <Link to="/about">
-            <div className={classes.link}>
-              About Us{viewportWidth > 800 && (
-                <div className={classes.dot}>&bull;</div>
-              )}
-            </div>
-          </Link>
+          <span className={classes.bullet}>
+            <Link to="/about">
+              <div className={classes.link}>About Us</div>
+            </Link>
+            {viewportWidth > 800 && <div className={classes.dot}>&bull;</div>}
+          </span>
         </h1>
         {user ? (
           <h1>

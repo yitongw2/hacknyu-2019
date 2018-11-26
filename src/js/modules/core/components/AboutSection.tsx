@@ -24,7 +24,7 @@ const styles = (_theme: Theme): Styles => ({
   },
   image: {
     maxWidth: "700px",
-    width: "80vw"
+    width: "65vw"
   },
   imageContainer: {
     display: "flex",

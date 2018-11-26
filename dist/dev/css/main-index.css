@@ -79,6 +79,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 h1 {
     margin: 0;
 }

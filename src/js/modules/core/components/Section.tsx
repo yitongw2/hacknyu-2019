@@ -36,6 +36,7 @@ const styles = (theme: Theme): Styles => ({
 
 interface InfoBlock {
   id: number;
+  color: string;
   text: string;
 }
 
@@ -45,7 +46,7 @@ interface Props {
   children: ReactNode;
   viewportWidth: number;
   infoBlock: InfoBlock;
-  activeBlocks: Set<number>;
+  activeBlocks: number;
 }
 
 const Section: React.SFC<Props> = ({
