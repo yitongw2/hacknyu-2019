@@ -2,16 +2,16 @@ import * as React from "react";
 import injectSheet, { Styles } from "react-jss/lib/injectSheet";
 import { ReactNode } from "react";
 import Timeline from "./Timeline";
-import { State } from "../../types";
+import { State, Theme } from "../../types";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Theme } from "theming";
+import InfoBlock from "./InfoBlock";
 
 // Minimum width for timeline
 const MIN_TIMELINE_WIDTH = 500;
-const mediaTag = `@media (max-width: ${MIN_TIMELINE_WIDTH})`;
+const mediaTag = `@media (max-width: ${MIN_TIMELINE_WIDTH}px)`;
 
-const styles = (_: Theme): Styles => ({
+const styles = (theme: Theme): Styles => ({
   Section: {
     display: "flex",
     flexDirection: "row",
@@ -24,7 +24,7 @@ const styles = (_: Theme): Styles => ({
   timeline: {
     display: "flex",
     justifyContent: "center",
-    width: "30vw"
+    width: "30vw",
   },
   // @ts-ignore
   [mediaTag]: {
@@ -33,14 +33,24 @@ const styles = (_: Theme): Styles => ({
     }
   }
 });
+
+interface InfoBlock {
+  id: number;
+  text: string;
+}
+
 interface Props {
   className: string;
   classes: { [s: string]: string };
   children: ReactNode;
   viewportWidth: number;
+  infoBlock: InfoBlock;
+  activeBlocks: Set<number>;
 }
 
 const Section: React.SFC<Props> = ({
+  activeBlocks,
+  infoBlock,
   className,
   classes,
   children,
@@ -52,7 +62,8 @@ const Section: React.SFC<Props> = ({
         <div className={classes.content}>{children}</div>
         {viewportWidth > MIN_TIMELINE_WIDTH && (
           <div className={classes.timeline}>
-              <Timeline />
+            <InfoBlock activeBlocks={activeBlocks} {...infoBlock} />
+            <Timeline />
           </div>
         )}
       </div>

@@ -49,7 +49,9 @@ const styles = (theme: Theme): Styles => ({
   },
   info: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    // Small hack for Chrome. Not sure why.
+    backgroundColor: theme.thirdBackground
   },
   timeline: {
     width: "20vw"
@@ -65,10 +67,16 @@ interface HomePageProps {
   classes: { [s: string]: string };
   viewportWidth: number;
 }
+interface HomePageState {
+  activeBlocks: Set<number>;
+}
 
-class HomePage extends React.Component<HomePageProps> {
+class HomePage extends React.Component<HomePageProps, HomePageState> {
   constructor(props: HomePageProps) {
     super(props);
+    this.state = {
+      activeBlocks: new Set()
+    };
   }
 
   handleStepEnter = ({
@@ -79,10 +87,33 @@ class HomePage extends React.Component<HomePageProps> {
     element: any;
     data: any;
     direction: any;
-  }) => console.log(element, data, direction);
+  }) => {
+    if (direction === "down") {
+      this.state.activeBlocks.add(data);
+    }
+    this.setState({ activeBlocks: this.state.activeBlocks });
+  };
+
+  handleStepExit = ({
+                       element,
+                       data,
+                       direction
+                     }: {
+    element: any;
+    data: any;
+    direction: any;
+  }) => {
+    console.log(element, data, direction);
+    if (direction === "up") {
+      this.state.activeBlocks.delete(data);
+    }
+    this.setState({ activeBlocks: this.state.activeBlocks });
+  };
 
   render() {
     let { classes } = this.props;
+
+    // @ts-ignore
     return (
       <div className={classes.HomePage}>
         <ApplyButton />
@@ -93,17 +124,23 @@ class HomePage extends React.Component<HomePageProps> {
           <SubwayLine delay="-2.4s" color="orange" />
         </div>
         <div className={classes.info}>
-          <Scrollama onStepEnter={this.handleStepEnter}>
-            <Step data={0}>
+          <Scrollama onStepEnter={this.handleStepEnter} onStepExit={this.handleStepExit}>
+            <Step data={0} key={0}>
               <div className={classes.aboutSection}>
-                <Section>
+                <Section
+                  activeBlocks={this.state.activeBlocks}
+                  infoBlock={{ id: 0, text: "Sign Up" }}
+                >
                   <AboutSection />
                 </Section>
               </div>
             </Step>
-            <Step data={1}>
+            <Step data={1} key={1}>
               <div className={classes.activitiesSection}>
-                <Section>
+                <Section
+                  activeBlocks={this.state.activeBlocks}
+                  infoBlock={{ id: 1, text: "Get admissions result" }}
+                >
                   <div className={classes.quote}>
                     <p>Inspirational quote here!</p>
                     <span className={classes.quoteAuthor}>
@@ -115,7 +152,10 @@ class HomePage extends React.Component<HomePageProps> {
             </Step>
             <Step data={2}>
               <div className={classes.tracksSection}>
-                <Section>
+                <Section
+                  activeBlocks={this.state.activeBlocks}
+                  infoBlock={{ id: 2, text: "Go to hackathon!" }}
+                >
                   <TrackInfo />
                 </Section>
               </div>

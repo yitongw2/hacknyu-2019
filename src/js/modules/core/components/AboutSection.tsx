@@ -23,7 +23,8 @@ const styles = (_theme: Theme): Styles => ({
     fontSize: "3em"
   },
   image: {
-    maxWidth: "700px"
+    maxWidth: "700px",
+    width: "80vw"
   },
   imageContainer: {
     display: "flex",
