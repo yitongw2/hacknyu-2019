@@ -24,7 +24,7 @@ const styles = (theme: Theme): Styles => ({
   timeline: {
     display: "flex",
     justifyContent: "center",
-    width: "30vw",
+    width: "30vw"
   },
   // @ts-ignore
   [mediaTag]: {
@@ -41,33 +41,32 @@ interface InfoBlock {
 }
 
 interface Props {
-  className: string;
   classes: { [s: string]: string };
   children: ReactNode;
-  viewportWidth: number;
+  viewportWidth?: number;
   infoBlock: InfoBlock;
+}
+
+interface ConnectProps {
   activeBlocks: number;
 }
 
-const Section: React.SFC<Props> = ({
+const Section: React.SFC<Props & ConnectProps> = ({
   activeBlocks,
   infoBlock,
-  className,
   classes,
   children,
   viewportWidth
 }) => {
   return (
-    <div className={className}>
-      <div className={classes.Section}>
-        <div className={classes.content}>{children}</div>
-        {viewportWidth > MIN_TIMELINE_WIDTH && (
-          <div className={classes.timeline}>
-            <InfoBlock activeBlocks={activeBlocks} {...infoBlock} />
-            <Timeline />
-          </div>
-        )}
-      </div>
+    <div className={classes.Section}>
+      <div className={classes.content}>{children}</div>
+      {viewportWidth > MIN_TIMELINE_WIDTH && (
+        <div className={classes.timeline}>
+          <InfoBlock activeBlocks={activeBlocks} {...infoBlock} />
+          <Timeline />
+        </div>
+      )}
     </div>
   );
 };
@@ -76,4 +75,6 @@ const mapStateToProps = (state: State) => ({
   viewportWidth: state.core.viewportWidth
 });
 
-export default compose(injectSheet(styles), connect(mapStateToProps))(Section);
+export default injectSheet(styles)(
+  connect<{}, {}, ConnectProps>(mapStateToProps)(Section)
+);

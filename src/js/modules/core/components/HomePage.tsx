@@ -64,11 +64,11 @@ const styles = (theme: Theme): Styles => ({
   },
   hiddenTrip: {
     width: "100vw",
-    height: "10px",
-    position: "absolute",
-    fontSize: "1px",
+    height: "1px",
+    position: "relative",
+    fontSize: "10px",
     color: theme.secondBackground,
-    top: "120vh"
+    top: "50vh"
   }
 });
 
@@ -95,24 +95,18 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
   }
 
   handleStepEnter = ({ element, data, direction }: StepData) => {
-    console.log("ENTER");
-    console.log(element, data, direction);
     if (direction === "down") {
       this.setState({ activeBlocks: data });
     }
   };
 
   handleStepExit = ({ element, data, direction }: StepData) => {
-    console.log("EXIT");
-    console.log(element, data, direction);
     if (direction === "up") {
       this.setState({ activeBlocks: data - 1 });
     }
   };
 
   handleTopEnter = ({ element, data, direction }: StepData) => {
-    console.log("TOP");
-    console.log(element, data, direction);
     if (direction === "up") {
       this.setState({ activeBlocks: -1 });
     }
@@ -121,7 +115,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
   render() {
     let { classes } = this.props;
 
-    // @ts-ignore
     return (
       <div className={classes.HomePage}>
         <ApplyButton />
@@ -134,7 +127,11 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         <div className={classes.hiddenTrip}>
           <Scrollama onStepEnter={this.handleTopEnter}>
             <Step data={0}>
-              <div> Hello </div>
+              <div>
+                {" "}
+                Hello you've found the hacky hack I'm using to trigger onScroll
+                events
+              </div>
             </Step>
           </Scrollama>
         </div>
