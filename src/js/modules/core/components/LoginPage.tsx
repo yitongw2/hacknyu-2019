@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 //@ts-ignore
 import { login } from "../coreActions";
 import preventExtensions = Reflect.preventExtensions;
+import { emailRegex } from "../../constants";
 
 const styles = (theme: Theme): Styles => ({
   LoginPage: {
@@ -18,8 +19,8 @@ const styles = (theme: Theme): Styles => ({
     alignItems: "center",
     height: "100%",
     width: "75%",
-    color: theme.secondFont,
-    backgroundColor: theme.highlightColor
+    color: theme.fontColor,
+    backgroundColor: theme.formBackground
   },
   form: {
     display: "flex",
@@ -35,13 +36,20 @@ const styles = (theme: Theme): Styles => ({
   },
   field: {
     display: "flex",
-    alignItems: "center",
+    flexDirection: "column",
     fontSize: "1.4rem",
     padding: "5px"
+  },
+  inputArea: {
+    display: "flex"
   },
   label: {
     padding: "5px",
     width: "100px"
+  },
+  error: {
+    color: "red",
+    fontSize: "1rem"
   }
 });
 
@@ -49,41 +57,79 @@ interface Props {
   classes: { [s: string]: string };
   loginWithGoogle: () => any;
 }
+
 const LoginPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
   const handleSubmit = (values: [string]) => {
     console.log(values);
   };
+
+  const handleGoogleLogin = (event: Event) => {
+    event.preventDefault();
+    loginWithGoogle();
+  }
 
   return (
     <div className={classes.LoginPage}>
       <h1> Login </h1>
       <Form
         onSubmit={handleSubmit}
-        render={({ handleSubmit, pristine, invalid }) => (
+        validate={values => {
+          let errors: { email?: string; password?: string } = {};
+          //@ts-ignore
+          if (values.email && !emailRegex.test(values.email)) {
+            errors.email = "Invalid email";
+          }
+          //@ts-ignore
+          if (values.password && values.password.length < 8) {
+            errors.password =
+              "Password is too short, must be at least 8 characters";
+          }
+          return errors;
+        }}
+        render={({ handleSubmit, invalid }) => (
           <form className={classes.form} onSubmit={handleSubmit}>
-            <label className={classes.field}>
-              <div className={classes.label}>Email:</div>
-              <Field
-                className={classes.input}
-                name="email"
-                component="input"
-                placeholder="alyssap@hacker.com"
-              />
-            </label>
-            <label className={classes.field}>
-              <div className={classes.label}>Password:</div>
-              <Field
-                className={classes.input}
-                name="password"
-                placeholder="**********"
-                component="input"
-                type="password"
-              />
-            </label>
-            <Button width="100px" type="submit">
+            <Field name="email">
+              {({ input, meta }) => (
+                <div className={classes.field}>
+                  <div className={classes.inputArea}>
+                    <div className={classes.label}>Email: </div>
+                    <input
+                      {...input}
+                      type="email"
+                      placeholder="alyssap@hacker.com"
+                      className={classes.input}
+                    />
+                  </div>
+                  {meta.error &&
+                    meta.touched && (
+                      <span className={classes.error}>{meta.error}</span>
+                    )}
+                </div>
+              )}
+            </Field>
+            <Field name="password">
+              {({ input, meta }) => (
+                <div className={classes.field}>
+                  <div className={classes.inputArea}>
+                    <div className={classes.label}>Password:</div>
+                    <input
+                      {...input}
+                      className={classes.input}
+                      placeholder="**********"
+                      type="password"
+                    />
+                  </div>
+                  {meta.error &&
+                    meta.touched && (
+                      <span className={classes.error}>{meta.error}</span>
+                    )}
+                </div>
+              )}
+            </Field>
+            <Button disabled={invalid} width="100px" type="submit">
               Submit
             </Button>
-            <Button width="200px" onClick={loginWithGoogle}>
+            <Button width="200px" onClick={handleGoogleLogin}>
               Login w/ Google
             </Button>
           </form>
@@ -94,8 +140,7 @@ const LoginPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loginWithGoogle: (event: Event) => {
-    event.preventDefault();
+  loginWithGoogle: () => {
     dispatch(login());
   }
 });

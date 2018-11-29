@@ -5,7 +5,7 @@ import appHistory from "tools/appHistory";
 import MainApp from "./core/components/MainApp";
 import HomePage from "./core/components/HomePage";
 import SignUpPage from "./core/components/SignUpPage";
-import { ConnectedRouter } from "react-router-redux";
+import { ConnectedRouter } from "connected-react-router";
 import store from "../store";
 import ThemeInjector from "./ThemeInjector";
 import ApplyPage from './core/components/ApplyPage'

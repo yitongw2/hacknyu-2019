@@ -1,5 +1,5 @@
 import { auth, provider } from '../../firebase'
-
+import { push } from "connected-react-router"
 export const REFRESH_WINDOW_DIMENSIONS = "core/REFRESH_WINDOW_DIMENSIONS";
 export const LOGIN_FULFILLED = "core/LOGIN_FULFILLED";
 export const LOGIN_REJECTED = "core/LOGIN_REJECTED";
@@ -42,6 +42,7 @@ export const login = () => dispatch => {
       type: LOGIN_FULFILLED,
       payload: user
     })
+    dispatch(push('/apply'));
   })
   .catch(err => {
     dispatch({
@@ -50,3 +51,4 @@ export const login = () => dispatch => {
     })
   });
 };
+
