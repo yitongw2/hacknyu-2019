@@ -1,9 +1,14 @@
 import * as React from "react";
 import { Styles } from "react-jss";
-import { Theme } from "../../types";
+import { State, Theme } from "../../types";
 import injectSheet from "react-jss/lib/injectSheet";
 import { FormEvent } from "react";
 import { Form, Field } from "react-final-form";
+import { db } from "../../../firebase";
+import { User } from "firebase";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
 
 const styles = (theme: Theme): Styles => ({
   ApplyPage: {
@@ -44,14 +49,24 @@ const styles = (theme: Theme): Styles => ({
     fontSize: "1em",
     border: "none",
     color: theme.secondFont,
-    '&:disabled': {
-      backgroundColor: theme.highlightColorHover,
+    "&:disabled": {
+      backgroundColor: theme.highlightColorHover
     }
+  },
+  save: {
+    width: "100px",
+    padding: "5px",
+    backgroundColor: theme.submitButton,
+    fontSize: "1em",
+    border: "none",
+    color: theme.secondFont
   }
 });
 
 interface Props {
   classes: { [s: string]: string };
+  user: User;
+  push: (route: string) => any;
 }
 
 class ApplyPage extends React.Component<Props> {
@@ -59,12 +74,24 @@ class ApplyPage extends React.Component<Props> {
     super(props);
   }
 
+  componentDidMount() {
+    if (!this.props.user) {
+      this.props.push("/login");
+    }
+  }
+
   handleChange = (event: FormEvent<HTMLInputElement>) => {
     this.setState({ name: event.currentTarget.value });
   };
 
   handleSubmit = (values: [string]) => {
-    console.log(values);
+    const { user } = this.props;
+    db
+      .collection("users")
+      .doc(user.uid)
+      .set(values)
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   };
 
   render() {
@@ -130,7 +157,11 @@ class ApplyPage extends React.Component<Props> {
                   </label>
                   <label>
                     Gender:
-                    <Field name="gender" component="select" className={classes.input}>
+                    <Field
+                      name="gender"
+                      component="select"
+                      className={classes.input}
+                    >
                       <option value="male"> Male </option>
                       <option value="female"> Female </option>
                       <option value="non-binary"> Non-binary </option>
@@ -154,5 +185,14 @@ class ApplyPage extends React.Component<Props> {
     );
   }
 }
+const mapStateToProps = (state: State) => ({
+  user: state.core.user
+});
 
-export default injectSheet(styles)(ApplyPage);
+const mapDispatchToProps = (dispatch: any) =>
+  bindActionCreators({ push }, dispatch);
+
+export default compose(
+  injectSheet(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(ApplyPage);

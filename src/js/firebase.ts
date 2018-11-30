@@ -12,6 +12,10 @@ firebase.initializeApp(config);
 firebase.auth().setPersistence('local').catch(err => {
   console.error(err);
 });
+const firestore = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+firestore.settings(settings);
+
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
-export default firebase;
+export const db = firestore;
