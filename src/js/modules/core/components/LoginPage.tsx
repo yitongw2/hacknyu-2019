@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { loginWithGoogle, loginWithPassword } from "../coreActions";
 import { emailRegex } from "../../constants";
 import Input from "./Input";
+import { Link } from "react-router-dom";
 
 const styles = (theme: Theme): Styles => ({
   LoginPage: {
@@ -27,6 +28,10 @@ const styles = (theme: Theme): Styles => ({
     flexDirection: "column",
     padding: "20px",
     alignItems: "flex-end"
+  },
+  registerLink: {
+    padding: "20px",
+    fontSize: "1.2em"
   }
 });
 
@@ -95,11 +100,14 @@ const LoginPage: React.SFC<Props> = ({
               )}
             </Field>
             <Button disabled={invalid} width="100px" type="submit">
-              Submit
+              Login
             </Button>
             <Button width="200px" onClick={handleGoogleLogin}>
               Login w/ Google
             </Button>
+            <Link to="/register" className={classes.registerLink}>
+            Don't have an account? Register
+            </Link>
           </form>
         )}
       />

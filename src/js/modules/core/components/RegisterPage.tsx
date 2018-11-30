@@ -7,8 +7,9 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { emailRegex } from "../../constants";
 // @ts-ignore
-import { loginWithGoogle, loginWithPassword } from "../coreActions";
+import { register } from "../coreActions";
 import Input from "./Input";
+import {Link} from "react-router-dom";
 
 const styles = (theme: Theme): Styles => ({
   RegisterPage: {
@@ -20,28 +21,34 @@ const styles = (theme: Theme): Styles => ({
     width: "75%",
     color: theme.fontColor,
     backgroundColor: theme.formBackground
-  }
+  },
+  loginLink: {
+    fontSize: "1.2em",
+    padding: "20px"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "20px",
+    alignItems: "flex-end"
+  },
 });
+
 
 interface Props {
   classes: { [s: string]: string };
-  loginWithGoogle: () => any;
+  register: ({ email, password }: FormValues) => any;
 }
 
 interface FormValues {
-  email: string;
-  password: string;
-  passwordConfirmation: string;
+  email?: string;
+  password?: string;
+  passwordConfirmation?: string;
 }
 
-const RegisterPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
+const RegisterPage: React.SFC<Props> = ({ classes, register }) => {
   const handleSubmit = (values: FormValues) => {
-    console.log(values);
-  };
-
-  const handleGoogleLogin = (event: Event) => {
-    event.preventDefault();
-    loginWithGoogle();
+    register(values);
   };
 
   return (
@@ -50,12 +57,24 @@ const RegisterPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
       <Form
         onSubmit={handleSubmit}
         validate={values => {
-          let errors: {
-            email?: string;
-            password?: string;
-            passwordConfirmation?: string;
-          } = {};
-          // Ugh the typing rules for final-form are broken
+          let errors: FormValues = {};
+          // Ugh the typing rules for final-form are broken, hence all the ts-ignores
+
+          //@ts-ignore
+          if (!values.email) {
+            errors.email = "Email is required";
+          }
+
+          //@ts-ignore
+          if (!values.password) {
+            errors.password = "Password is required";
+          }
+
+          //@ts-ignore
+          if (!values.passwordConfirmation) {
+            errors.password = "Password confirmation is required";
+          }
+
           //@ts-ignore
           if (values.password && values.password.length < 8) {
             errors.password = "Password must be at least 8 characters";
@@ -113,9 +132,9 @@ const RegisterPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
             <Button disabled={invalid} width="100px" type="submit">
               Submit
             </Button>
-            <Button width="200px" onClick={handleGoogleLogin}>
-              Login w/ Google
-            </Button>
+            <Link to="/login" className={classes.loginLink}>
+              Already have an account? Login
+            </Link>
           </form>
         )}
       />
@@ -124,11 +143,8 @@ const RegisterPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  loginWithGoogle: () => {
-    dispatch(loginWithGoogle());
-  },
-  loginWithPassword: ({ email, password }: FormValues) => {
-    dispatch(loginWithPassword({ email, password }));
+  register: ({ email, password }: FormValues) => {
+    dispatch(register({ email, password }));
   }
 });
 

@@ -1,7 +1,7 @@
 import {
   LOGIN_FULFILLED,
   LOGIN_REJECTED, LOGOUT_FULFILLED, LOGOUT_REJECTED,
-  REFRESH_WINDOW_DIMENSIONS
+  REFRESH_WINDOW_DIMENSIONS, REGISTER_FULFILLED, REGISTER_REJECTED
 } from './coreActions'
 import {User} from "firebase";
 
@@ -26,7 +26,10 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
-  user: null
+  user: null,
+  loginError: {},
+  logoutError: {},
+  registerError: {}
 };
 
 
@@ -46,11 +49,15 @@ const reducer = (state = { ...initialState }, action) => {
     case LOGIN_FULFILLED:
       return { ...state, user: action.payload };
     case LOGIN_REJECTED:
-      return { ...state, error: action.payload };
+      return { ...state, loginError: action.payload };
     case LOGOUT_FULFILLED:
       return { ...state, user: null };
     case LOGOUT_REJECTED:
-      return { ...state, error: action.payload };
+      return { ...state, logoutError: action.payload };
+    case REGISTER_REJECTED:
+      return { ...state, registerError: action.payload };
+    case REGISTER_FULFILLED:
+      return { ...state, user: action.payload };
     default:
       break;
   }
