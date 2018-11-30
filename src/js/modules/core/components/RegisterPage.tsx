@@ -1,18 +1,17 @@
 import * as React from "react";
+import injectSheet, { Styles } from "react-jss/lib/injectSheet";
 import { Theme } from "../../types";
-import { Styles } from "react-jss";
-import injectSheet from "react-jss/lib/injectSheet";
 import { Field, Form } from "react-final-form";
 import Button from "./Button";
-import { compose } from "redux";
 import { connect } from "react-redux";
-//@ts-ignore
-import { loginWithGoogle, loginWithPassword } from "../coreActions";
+import { compose } from "redux";
 import { emailRegex } from "../../constants";
+// @ts-ignore
+import { loginWithGoogle, loginWithPassword } from "../coreActions";
 import Input from "./Input";
 
 const styles = (theme: Theme): Styles => ({
-  LoginPage: {
+  RegisterPage: {
     padding: "30px",
     display: "flex",
     flexDirection: "column",
@@ -21,35 +20,23 @@ const styles = (theme: Theme): Styles => ({
     width: "75%",
     color: theme.fontColor,
     backgroundColor: theme.formBackground
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "20px",
-    alignItems: "flex-end"
   }
 });
 
 interface Props {
   classes: { [s: string]: string };
   loginWithGoogle: () => any;
-  loginWithPassword: (
-    { email, password }: { email: string; password: string }
-  ) => any;
 }
 
 interface FormValues {
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
-const LoginPage: React.SFC<Props> = ({
-  classes,
-  loginWithGoogle,
-  loginWithPassword
-}) => {
+const RegisterPage: React.SFC<Props> = ({ classes, loginWithGoogle }) => {
   const handleSubmit = (values: FormValues) => {
-    loginWithPassword(values);
+    console.log(values);
   };
 
   const handleGoogleLogin = (event: Event) => {
@@ -58,12 +45,30 @@ const LoginPage: React.SFC<Props> = ({
   };
 
   return (
-    <div className={classes.LoginPage}>
-      <h1> Login </h1>
+    <div className={classes.RegisterPage}>
+      <h1> Register </h1>
       <Form
         onSubmit={handleSubmit}
         validate={values => {
-          let errors: { email?: string; password?: string } = {};
+          let errors: {
+            email?: string;
+            password?: string;
+            passwordConfirmation?: string;
+          } = {};
+          // Ugh the typing rules for final-form are broken
+          //@ts-ignore
+          if (values.password && values.password.length < 8) {
+            errors.password = "Password must be at least 8 characters";
+          }
+
+          //@ts-ignore
+          if (values.password && values.passwordConfirmation) {
+            //@ts-ignore
+            if (values.password !== values.passwordConfirmation) {
+              errors.passwordConfirmation =
+                "Password must be the same as password confirmation";
+            }
+          }
           //@ts-ignore
           if (values.email && !emailRegex.test(values.email)) {
             errors.email = "Invalid email";
@@ -79,7 +84,7 @@ const LoginPage: React.SFC<Props> = ({
                   meta={meta}
                   label="Email"
                   type="email"
-                  placeholder="alyssap@hacker.com"
+                  placeholder="ben@bitdiddle.com"
                 />
               )}
             </Field>
@@ -89,6 +94,17 @@ const LoginPage: React.SFC<Props> = ({
                   input={input}
                   meta={meta}
                   label="Password"
+                  type="password"
+                  placeholder="********"
+                />
+              )}
+            </Field>
+            <Field name="passwordConfirmation">
+              {({ input, meta }) => (
+                <Input
+                  input={input}
+                  meta={meta}
+                  label="Confirm"
                   type="password"
                   placeholder="********"
                 />
@@ -117,5 +133,5 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export default compose(injectSheet(styles), connect(null, mapDispatchToProps))(
-  LoginPage
+  RegisterPage
 );

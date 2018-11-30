@@ -19,12 +19,13 @@ export const logout = () => dispatch => {
     dispatch({
       type: LOGOUT_FULFILLED
     })
+    dispatch(push("/"));
   })
   .catch(err => {
     dispatch({
       type: LOGOUT_REJECTED,
       payload: err
-    })
+    });
   });
 };
 
@@ -34,7 +35,20 @@ export const addUser = user => ({
   payload: user
 });
 
-export const login = () => dispatch => {
+export const loginWithPassword = ({ password, email }) => dispatch => {
+  auth.signInWithEmailAndPassword(email, password)
+  .then(result => {
+    console.log("SUCCESS!");
+    console.log(result);
+  })
+  .catch(err => {
+    console.log("FAILURE!");
+    console.error(err);
+  })
+}
+
+
+export const loginWithGoogle = () => dispatch => {
   auth.signInWithPopup(provider)
   .then(result => {
     const user = result.user;

@@ -118,7 +118,7 @@ const Header: React.SFC<Props> = ({
             </span>
           </h1>
         )}
-        <h1 className={classes.aboutUs}>
+        <h1>
           <span className={classes.bullet}>
             <Link to="/about">
               <div className={classes.link}>About Us</div>
@@ -133,11 +133,23 @@ const Header: React.SFC<Props> = ({
             </a>
           </h1>
         ) : (
-          <h1>
-            <a href="#" className={classes.link} onClick={login}>
-              Login
-            </a>
-          </h1>
+          [
+            <h1 key={0}>
+              <span className={classes.bullet}>
+                <Link to="/login" className={classes.link}>
+                  Login
+                </Link>
+                {viewportWidth > 800 && (
+                  <div className={classes.dot}>&bull;</div>
+                )}
+              </span>
+            </h1>,
+            <h1 key={1}>
+              <Link to="/register" className={classes.link}>
+                Register
+              </Link>
+            </h1>
+          ]
         )}
       </div>
     </div>
