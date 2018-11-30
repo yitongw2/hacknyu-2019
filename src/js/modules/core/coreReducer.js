@@ -26,7 +26,7 @@ const getViewportHeight = () => {
 const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
-  user: null,
+  user: {},
   loginError: {},
   logoutError: {},
   registerError: {}
@@ -51,7 +51,7 @@ const reducer = (state = { ...initialState }, action) => {
     case LOGIN_REJECTED:
       return { ...state, loginError: action.payload };
     case LOGOUT_FULFILLED:
-      return { ...state, user: null };
+      return { ...state, user: undefined };
     case LOGOUT_REJECTED:
       return { ...state, logoutError: action.payload };
     case REGISTER_REJECTED:

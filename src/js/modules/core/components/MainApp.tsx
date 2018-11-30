@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { State, Theme } from "../../types";
 // @ts-ignore
-import { addUser, refreshWindowDimensions } from "../coreActions";
+import { addUser, deleteUser, refreshWindowDimensions } from "../coreActions";
 import Header from "./Header";
 import { User } from "firebase";
 import UserInfo from "./UserInfo";
@@ -32,19 +32,26 @@ interface Props {
   location: Location;
   user: User;
   addUser: (u: User) => any;
+  deleteUser: () => any;
   onResizeWindow: () => any;
 }
 
 class MainApp extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        props.addUser(user);
+      } else {
+        props.deleteUser();
+      }
+    });
+  }
+
   onResizeWindow = () => {
     this.props.onResizeWindow();
   };
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.props.addUser(user);
-      }
-    });
     window.addEventListener("resize", this.onResizeWindow);
   }
   componentWillUnmount() {
@@ -70,6 +77,7 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   addUser: (user: User) => dispatch(addUser(user)),
+  deleteUser: () => dispatch(deleteUser()),
   onResizeWindow: () => {
     dispatch(refreshWindowDimensions());
   }

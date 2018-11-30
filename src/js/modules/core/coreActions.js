@@ -38,6 +38,10 @@ export const addUser = user => ({
   payload: user
 });
 
+export const deleteUser = () => ({
+  type: LOGOUT_FULFILLED,
+})
+
 export const loginWithPassword = ({ password, email }) => dispatch => {
   auth
     .signInWithEmailAndPassword(email, password)

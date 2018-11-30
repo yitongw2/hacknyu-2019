@@ -74,10 +74,11 @@ class ApplyPage extends React.Component<Props> {
     super(props);
   }
 
-  componentDidMount() {
-    if (!this.props.user) {
-      this.props.push("/login");
+  shouldComponentUpdate(nextProps: Props, nextState: object): boolean {
+    if (!nextProps.user) {
+      nextProps.push("/login");
     }
+    return true;
   }
 
   handleChange = (event: FormEvent<HTMLInputElement>) => {
