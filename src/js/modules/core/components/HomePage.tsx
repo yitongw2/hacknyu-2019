@@ -64,11 +64,11 @@ const styles = (theme: Theme): Styles => ({
   },
   hiddenTrip: {
     width: "100vw",
-    height: "1px",
+    height: "10px",
     position: "relative",
     fontSize: "10px",
     color: theme.secondBackground,
-    top: "50vh"
+    top: "60vh"
   }
 });
 
@@ -127,11 +127,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         <div className={classes.hiddenTrip}>
           <Scrollama onStepEnter={this.handleTopEnter}>
             <Step data={0}>
-              <div>
-                {" "}
-                Hello you've found the hacky hack I'm using to trigger onScroll
-                events
-              </div>
+              <div> </div>
             </Step>
           </Scrollama>
         </div>
@@ -144,7 +140,11 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               <div className={classes.aboutSection}>
                 <Section
                   activeBlocks={this.state.activeBlocks}
-                  infoBlock={{ id: 0, text: "Sign Up", color: trackColors.red }}
+                  infoBlock={{
+                    id: 0,
+                    text: "January 23rd: Sign Up",
+                    color: trackColors.red
+                  }}
                 >
                   <AboutSection />
                 </Section>
@@ -156,7 +156,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
                   activeBlocks={this.state.activeBlocks}
                   infoBlock={{
                     id: 1,
-                    text: "Get admissions result",
+                    text: "February 29th: Get admissions result",
                     color: trackColors.orange
                   }}
                 >
@@ -175,7 +175,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
                   activeBlocks={this.state.activeBlocks}
                   infoBlock={{
                     id: 2,
-                    text: "Go to hackathon!",
+                    text: "March 23rd: Go to hackathon!",
                     color: trackColors.green
                   }}
                 >
