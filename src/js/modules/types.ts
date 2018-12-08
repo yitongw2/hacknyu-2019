@@ -2,6 +2,8 @@ import {User} from "firebase";
 
 export interface State {
   core: CoreState
+  formData: FormData;
+  loading: boolean;
 }
 export interface CoreState {
   viewportWidth: number
