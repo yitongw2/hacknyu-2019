@@ -1,6 +1,6 @@
 import * as React from "react";
 import injectSheet, { Styles } from "react-jss";
-import { State, Theme } from "../../types";
+import { ReduxState, Theme } from "../../types";
 import SubwayLine from "./SubwayLine";
 import ApplyButton from "./ApplyButton";
 import TrackInfo from "./TrackInfo";

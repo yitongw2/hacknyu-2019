@@ -2,7 +2,7 @@ import * as React from "react";
 import injectSheet, { Styles } from "react-jss/lib/injectSheet";
 import { ReactNode } from "react";
 import Timeline from "./Timeline";
-import { State, Theme } from "../../types";
+import { ReduxState, Theme } from "../../types";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import InfoBlock from "./InfoBlock";
@@ -72,7 +72,7 @@ const Section: React.SFC<Props & ConnectProps> = ({
   );
 };
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: ReduxState) => ({
   viewportWidth: state.core.viewportWidth
 });
 
