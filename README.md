@@ -30,4 +30,4 @@ To contribute, clone the repo and run
 | Username | Year | Favorite food |
 |----------|------|---------------|
 
-Leshyabracaglia Junior  Cheeseburger
+Leshyabracaglia |Junior  |Cheeseburger
