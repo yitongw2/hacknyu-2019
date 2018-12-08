@@ -27,7 +27,9 @@ To contribute, clone the repo and run
 
 ## Contributors 
 
+
 |  Username      | Year | Favorite food    |
 |----------------|------|------------------|
 | kristelfung    | 2022 |     Sushi        |
 | themichaelyang | 2020 | all of the above |
+| Leshyabracaglia  | 2020  |Cheeseburger |
