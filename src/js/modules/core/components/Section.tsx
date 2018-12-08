@@ -36,6 +36,7 @@ const styles = (theme: Theme): Styles => ({
 
 interface InfoBlock {
   id: number;
+  date: string;
   color: string;
   text: string;
 }
