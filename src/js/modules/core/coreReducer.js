@@ -27,10 +27,10 @@ const initialState = {
   viewportWidth: getViewportWidth(),
   viewportHeight: getViewportHeight(),
   user: {},
-  appError: {},
-  loginError: {},
-  logoutError: {},
-  registerError: {}
+  appError: undefined,
+  loginError: undefined,
+  logoutError: undefined,
+  registerError: undefined
 };
 
 
