@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { User } from "firebase";
 
-import { State, Theme } from "../../types";
+import { ReduxState, Theme } from "../../types";
 import { db } from "../../../firebase";
 
 
@@ -242,7 +242,7 @@ class ApplyPage extends React.Component<Props, ApplyPageState> {
     );
   }
 }
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: ReduxState) => ({
   user: state.core.user
 });
 
