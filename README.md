@@ -29,3 +29,5 @@ To contribute, clone the repo and run
 
 | Username | Year | Favorite food |
 |----------|------|---------------|
+
+Leshyabracaglia Junior  Cheeseburger
