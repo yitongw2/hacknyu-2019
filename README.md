@@ -24,8 +24,8 @@ To contribute, clone the repo and run
   - Add god mode (organizer view)
   - Rewrite in Rust
   - Rewrite in Haskell
-
-## Contributors 
+  
+## Contributors
 
 |  Username      | Year | Favorite food    |
 |----------------|------|------------------|
@@ -34,3 +34,4 @@ To contribute, clone the repo and run
 | Leshyabracaglia  | 2020  |Cheeseburger |
 | eisenhuang | 2019 | Sushi |
 | yitongw2 | 2020 | Hot pot |
+| stefancherubin | 2019 | Wings |
