@@ -1,12 +1,10 @@
 import * as React from "react";
 import injectSheet, { Styles } from "react-jss";
-import { ReduxState, Theme } from "../../types";
+import { Theme } from "../../types";
 import SubwayLine from "./SubwayLine";
 import ApplyButton from "./ApplyButton";
 import TrackInfo from "./TrackInfo";
-import Timeline from "./Timeline";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import Waypoint from "react-waypoint";
 import AboutSection from "./AboutSection";
 import Section from "./Section";
 // @ts-ignore
@@ -68,7 +66,7 @@ const styles = (theme: Theme): Styles => ({
     position: "relative",
     fontSize: "10px",
     color: theme.secondBackground,
-    top: "60vh"
+    top: "100vh"
   }
 });
 
@@ -80,10 +78,9 @@ interface HomePageState {
   activeBlocks: number;
 }
 
-interface StepData {
-  element: HTMLElement;
-  data: number;
-  direction: string;
+interface ScrollData {
+  currentPosition: string;
+  previousPosition: string;
 }
 
 class HomePage extends React.Component<HomePageProps, HomePageState> {
@@ -94,20 +91,38 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     };
   }
 
-  handleStepEnter = ({ element, data, direction }: StepData) => {
-    if (direction === "down") {
-      this.setState({ activeBlocks: data });
+  handleStepEnter = (index: number) => ({
+    currentPosition,
+    previousPosition
+  }: ScrollData) => {
+    console.log("ENTERING " + index);
+    console.log(`CURRENT: ${currentPosition}`);
+    console.log(`PREVIOUS: ${previousPosition}`);
+    if (currentPosition === "inside" && previousPosition === "above") {
+      this.setState({ activeBlocks: index  });
+    } else {
+      this.setState({ activeBlocks: index });
     }
   };
 
-  handleStepExit = ({ element, data, direction }: StepData) => {
-    if (direction === "up") {
-      this.setState({ activeBlocks: data - 1 });
-    }
+  handleStepLeave = (index: number) => ({
+    currentPosition,
+    previousPosition
+  }: ScrollData) => {
+    console.log("EXITING " + index);
+    console.log(`CURRENT: ${currentPosition}`);
+    console.log(`PREVIOUS: ${previousPosition}`);
+    //this.setState({ activeBlocks: index - 1 });
   };
 
-  handleTopEnter = ({ element, data, direction }: StepData) => {
-    if (direction === "up") {
+  handleTopEnter = ({
+    currentPosition,
+    previousPosition
+  }: {
+    currentPosition: string;
+    previousPosition: string;
+  }) => {
+    if (currentPosition === "below" && previousPosition === "inside") {
       this.setState({ activeBlocks: -1 });
     }
   };
@@ -125,68 +140,76 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
           <SubwayLine delay="-2.4s" color={trackColors.orange} />
         </div>
         <div className={classes.hiddenTrip}>
-          <Scrollama onStepEnter={this.handleTopEnter}>
-            <Step data={0}>
-              <div> </div>
-            </Step>
-          </Scrollama>
+          <Waypoint onEnter={this.handleTopEnter} onLeave={this.handleTopEnter}>
+            <div> Blah blah blah </div>
+          </Waypoint>
         </div>
         <div className={classes.info}>
-          <Scrollama
-            onStepEnter={this.handleStepEnter}
-            onStepExit={this.handleStepExit}
+          <Waypoint
+            topOffset="50%"
+            bottomOffset="40%"
+            onEnter={this.handleStepEnter(0)}
+            onLeave={this.handleStepLeave(0)}
           >
-            <Step data={0} key={0}>
-              <div className={classes.aboutSection}>
-                <Section
-                  activeBlocks={this.state.activeBlocks}
-                  infoBlock={{
-                    id: 0,
-                    date: "January 1st",
-                    text: "Sign Up",
-                    color: trackColors.red
-                  }}
-                >
-                  <AboutSection />
-                </Section>
-              </div>
-            </Step>
-            <Step data={1} key={1}>
-              <div className={classes.activitiesSection}>
-                <Section
-                  activeBlocks={this.state.activeBlocks}
-                  infoBlock={{
-                    id: 1,
-                    date: "January 14th",
-                    text: "Get admissions result",
-                    color: trackColors.orange
-                  }}
-                >
-                  <div className={classes.quote}>
-                    <p>Inspirational quote here!</p>
-                    <span className={classes.quoteAuthor}>
-                      --- Albert Einstein
-                    </span>
-                  </div>
-                </Section>
-              </div>
-            </Step>
-            <Step data={2}>
-              <div className={classes.tracksSection}>
-                <Section
-                  activeBlocks={this.state.activeBlocks}
-                  infoBlock={{
-                    id: 2,
-                    date: "February 15th",
-                    text: "Go to hackathon!",
-                    color: trackColors.green
-                  }}
-                >
-                  <TrackInfo />
-                </Section>
-              </div>
-            </Step>
-          </Scrollama>
+            <div className={classes.aboutSection}>
+              <Section
+                activeBlocks={this.state.activeBlocks}
+                infoBlock={{
+                  id: 0,
+                  date: "January 1st",
+                  text: "Sign Up",
+                  color: trackColors.red
+                }}
+              >
+                <AboutSection />
+              </Section>
+            </div>
+          </Waypoint>
+          <Waypoint
+            topOffset="50%"
+            bottomOffset="40%"
+            onEnter={this.handleStepEnter(1)}
+            onLeave={this.handleStepLeave(1)}
+          >
+            <div className={classes.activitiesSection}>
+              <Section
+                activeBlocks={this.state.activeBlocks}
+                infoBlock={{
+                  id: 1,
+                  date: "January 14th",
+                  text: "Get admissions result",
+                  color: trackColors.orange
+                }}
+              >
+                <div className={classes.quote}>
+                  <p>Inspirational quote here!</p>
+                  <span className={classes.quoteAuthor}>
+                    --- Albert Einstein
+                  </span>
+                </div>
+              </Section>
+            </div>
+          </Waypoint>
+          <Waypoint
+            topOffset="50%"
+            bottomOffset="40%"
+            onEnter={this.handleStepEnter(2)}
+            onLeave={this.handleStepLeave(2)}
+          >
+            <div className={classes.tracksSection}>
+              <Section
+                activeBlocks={this.state.activeBlocks}
+                infoBlock={{
+                  id: 2,
+                  date: "February 15th",
+                  text: "Go to hackathon!",
+                  color: trackColors.green
+                }}
+              >
+                <TrackInfo />
+              </Section>
+            </div>
+          </Waypoint>
         </div>
       </div>
     );
