@@ -24,6 +24,7 @@ export interface Theme {
   highlightColorHover: string;
   formBackground: string;
   submitButton: string;
+  submitButtonHover: string;
   red: string;
   green: string;
   blue: string;
