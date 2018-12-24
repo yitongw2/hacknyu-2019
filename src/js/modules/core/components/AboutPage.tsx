@@ -13,7 +13,7 @@ const styles = (theme: Theme): Styles => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: "80vw",
+    width: "100%",
     padding: "5%"
   },
   icons: {
@@ -22,6 +22,7 @@ const styles = (theme: Theme): Styles => ({
     justifyContent: "space-around"
   },
   text: {
+    padding: "0 10px 0",
     maxWidth: "500px"
   }
 });
@@ -47,9 +48,9 @@ const AboutPage: React.SFC<Props> = ({ classes }) => {
         <FontAwesomeIcon icon={faAws} />
       </div>
       <p className={classes.text}>
-        This site is written in React with TypeScript, Firebase, JSS and Redux.
-        It is hosted on AWS. If you have any complaints/bugs/compliments, please
-        email nick at nicholasyang.com.
+      This site is written in React with TypeScript, Firebase, JSS and Redux.
+      It is hosted on AWS. It is hosted on AWS.
+      If you have any complaints, bugs or compliments, please email nick at nicholasyang.com.
       </p>
     </div>
   );

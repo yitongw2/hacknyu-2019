@@ -43,7 +43,8 @@ const styles = (theme: Theme): HomePageStyles<JssRules> => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: theme.backgroundColor,
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
   },
   aboutSection: {
     backgroundColor: theme.secondBackground,
@@ -77,7 +78,8 @@ const styles = (theme: Theme): HomePageStyles<JssRules> => ({
     display: "flex",
     flexDirection: "column",
     // Small hack for Chrome. Not sure why.
-    backgroundColor: theme.thirdBackground
+    backgroundColor: theme.thirdBackground,
+    width: "100%"
   },
   timeline: {
     width: "20vw"
